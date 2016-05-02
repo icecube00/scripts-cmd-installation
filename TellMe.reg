@@ -1,0 +1,445 @@
+REGEDIT4
+
+;[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\ManagerOfSystems\System_81]
+;Выходить в режим НЕ обслуживания (OOS) по команде хоста NDC
+; "SystemGroup"= dword:00000001
+
+;[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol]
+;Настройки TellMe: стейт перехода на работу с SIRUS
+; "f026_timeout" = dword:0002e2e2
+;"f026_timeout" = dword:000dbba0
+; "f026_url" = "http://127.0.0.1:8080/sirius-atm/"
+
+[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC]
+;Включаем режим поддержки внешних приложений
+;2 - Включен через web-extension
+ "Config" = "2"
+
+[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\WEB]
+;Настройки TellMe: не очищать историю
+ "ClearHistory" = dword:00000000
+;Настройки TellMe: отключить скролл на странице.
+ "Scrolled"= dword:00000000
+;Настройки WEB-EXT: Расширенное логирование
+ "LogFlags"= dword:000000ff
+;Отключаем рамку вокруг окна
+ "HasFrame"=dword:00000000
+;НЕ перезагружать окно WEB-EXT при каждом вызове
+ "Reload"= dword:00000001
+
+;Настройки для логирования XML-журнала
+[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\PaymentInfoTags]
+ "ST" = "SUIT_NUMBER"
+
+;Настройки для расширенного логгирования
+;[HKEY_CLASSES_ROOT\WOSA/XFS_ROOT\ATM\WEB\LOGACTX]
+
+;Место журналирования:
+; 1 - ERL
+; 2 - системный журнал
+; 4 - Отладочный вывод Windows
+; "_log_dest"=6
+
+;Интерфейсы для журналирования
+
+; Модуль: SCS_ACTX
+; 1 - SCS_ACTX_IF
+; 2 - BCR_EXCH_IF
+; 3 - NDC_EXCH_IF
+;"SCS_ACTX"=6
+
+; Модуль: NDC_KBD
+; 1 - KEYBOARD_IF
+; 2 - KBDMASK_IF
+; 3 - NDCDATA_IF
+; 4 - RECEIPT_IF
+;"NDC_KBD"=14
+
+; Модуль EARPHONE
+;"EARPHONE"=1
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer]
+"SmartDithering"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+;Предотвратить повторное использование окна Internet Explorer
+ "AllowWindowReuse" = dword:00000000
+;Отключить панель 'Меню'
+ "AlwaysShowMenus" = dword:00000000
+;Автоматически скрывать панель меню
+ "AutoHide" = "yes"
+;Отключение автопоиска
+ "AutoSearch" = dword:00000005
+;Отключение подчеркивания ссылок
+ "Anchor Underline"="no"
+;Не проверять IE, как браузер по умолчанию
+ "Check_Associations" = "no"
+;Отключить отладку скриптов (другие)
+ "Disable Script Debugger" = "yes"
+;Отключить отладку скриптов в IE
+ "DisableScriptDebuggerIE" = "yes"
+;Проигрывание встроенного видео
+ "Display Inline Videos" = "yes"
+;Не искать страницу 404 на сервере
+ "Do404Search"=hex:00,00,00,00
+;Не хранить DOM
+ "DOMStorage"=dword:00000000
+;Отключить панель ошибок
+ "Error Dlg Details Pane Open"="no"
+;Отключить авторесайз картинок
+ "Enable AutoImageResize"="no"
+;Отключить расширения для браузера
+ "Enable Browser Extensions" = "no"
+;Отключить панель работы с картинками
+ "Enable_MyPics_Hoverbar" = "no"
+;Полноэкранный режим
+ "FullScreen" = "yes"
+;Формировать страницу до показа
+ "Force Offscreen Composition"=dword:00000001
+;Первый запуск выполнен IE8
+ "IE8RunOnceLastShown" = dword:00000001
+ "IE8RunOnceLastShown_TIMESTAMP" = hex:
+ "IE8RunOncePerInstallCompleted" = dword:00000001
+;Отключение сообщения о завершении закачки
+ "NotifyDownloadComplete" = "no"
+;Проигрывание анимации
+ "Play_Animations" = "yes"
+;Проигрывание звуков
+ "Play_Background_Sounds" = "yes"
+;Печатать подложку
+ "Print_Background" = "no"
+;Первый запуск выполнен IE7
+ "RunOnceComplete" = dword:00000001
+ "RunOnceHasShown" = dword:00000001
+;Папка для сохранения загрузок.
+ "Save Directory" = "%SystemDrive%\Download"
+;Отключить параметры поиска
+ "Search Page" = ""
+;Показывать квадратики для отсутствующих картинок
+ "Show image placeholders" = dword:00000000
+;Не показывать StatusBar
+ "Show_StatusBar" = "no"
+;Не показывать ToolBar
+ "Show_ToolBar" = "no"
+ "Show_URLinStatusBar" = "no"
+ "Show_URLToolBar" = "no"
+;Отключиь показ кнопки GO
+ "ShowGoButton" = "no"
+;Не использовать плавную прокрутку
+ "SmoothScroll" = dword:00000000
+;Пустая домашняя страница
+ "Start Page" = "about:blank"
+ "StatusBarWeb" = dword:00000000
+;Выключить автозаполнение форм в IE
+ "Use FormSuggest" = "NO"
+;Не использовать стандартные цвета
+ "Use_DlgBox_Colors" = "no"
+;Не использовать ClearType для HTML
+ "UseClearType" = "no"
+;Отключить темы
+ "UseThemes" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_MAXCONNECTIONSPERSERVER]
+;Устанавливаем количество одновременных подключений = 10 (IE8)
+ "iexplore.exe" = dword:0000000a
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_MAXCONNECTIONSPER1_0SERVER]
+;Устанавливаем количество одновременных подключений = 10 (IE8)
+ "iexplore.exe" = dword:0000000a
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN]
+;Выключение блокировки зоны безопасности локального компьютера в IE (Выключаем Маразм)
+ "iexplore.exe" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN\Settings]
+;Дополнение из Custom
+ "LOCALMACHINE_CD_UNLOCK" = dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Toolbar]
+;Удаление папки "Ссылки" из Избранного
+ "LinksFolderName" = ""
+;Автоматически убирать панель меню
+ "Locked" = dword:00000000
+ "Theater"=hex:11,00,00,00,4c,00,00,00,00,00,00,00,3e,00,00,00,0d,00,00,00,26,\
+  00,00,00,02,00,00,00,20,07,00,00,90,01,00,00,01,00,00,00,28,07,00,00,c8,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+ "ITBarLayout"=hex:11,00,00,00,4c,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+ "ITBar7Layout"=hex:13,00,00,00,00,00,00,00,00,00,00,00,30,00,00,00,10,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+ "ITBar7Height"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Connection Wizard]
+;Отключение Internet Connection Wizard (при первом запуске IE8)
+ "Completed" = hex:01,00,00,00
+ "ShellNext" =-
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\CommandBar]
+;Не отображать панель команд
+ "CommandBarEnabled" = dword:00000000
+ "TextOption" = dword:00000002
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\InformationBar]
+;Не отображать высплывающее предупреждение при запуске ActiveX
+ "FirstTime" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\IntelliForms]
+;Отключить сообщение о возможности использования автозаполнения
+ "AskUser" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\LinksBar]
+;Не отображать панель избранного
+ "Enabled" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\New Windows]
+"PopupMgr"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\PhishingFilter]
+;Отключить фильтр Phishing
+ "Enabled" = dword:00000000
+;Выключить фильтр SmartScreen
+ "EnabledV8" = dword:00000000
+;Не показывать всплывающее предупреждение о срабатывании фильтра.
+ "ShownVerifyBalloon" = dword:00000003
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Suggested Sites]
+;Выключить "Рекомендуемые узлы"
+ "Enabled" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TabbedBrowsing]
+;При открытии новой вкладки открывать пустую страницу
+ "NewTabPageShow" = dword:00000000
+;Не открывать вкладки рядом с текущей
+ "OpenAdjacent" = dword:00000000
+;Открывать всплывающие окна в новой вкладке
+ "PopupsUseNewWindow" = dword:00000002
+;Отключить Welcome Tab
+ "ShowTabsWelcome" = dword:00000000
+;Отключить подтверждение закрытия вкладок
+ "WarnOnClose" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Ext\Stats\{6E32070A-766D-4EE6-879C-DC1FA91D2FC3}\iexplore]
+;Отключить вопрос об установке ActiveX
+ "Flags" = dword:00000004
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+;Установить максимальное количество соединений = 10 (IE7) 
+ "MaxConnectionsPer1_0Server" = dword:0000000a
+ "MaxConnectionsPerServer" = dword:0000000a
+;Отключить запрос на сохранение личной информации в cookies
+ "PrivDiscUiShown" = dword:00000001
+;Обновление страниц при каждой загрузке
+ "SyncMode5" = dword:00000003
+;Отключить запрос на копирование\перенос файлов в Intranet
+ "WarnOnIntranet" = dword:00000000
+;Отключить запрос на переход между зонами
+ "WarnOnZoneCrossing" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\5.0\Cache\Content]
+;Уменьшить кэш IE до 16Kb
+ "CacheLimit" = dword:00000010
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Activities\Блог\live.com]
+;Отключить "Разместить в блоге WindowsLive" и "Оправить по почте WindowsLive"
+ "Enabled" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Activities\Электронная почта\live.com]
+;Отключить "Разместить в блоге WindowsLive" и "Оправить по почте WindowsLive"
+ "Enabled" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Cache\Content]
+;Уменьшить кэш IE до 16Kb
+ "CacheLimit" = dword:00000010
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Url History]
+;Отключить сохранение истории посещений URL
+ "DaysToKeep" = dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap]
+;Отключить автоматическое определение сети Intranet
+ "AutoDetect" = dword:00000000
+;Отключить включение всех локальных страниц в зону Intranet
+ "IntranetName" = dword:00000001
+;Включить UNC пути
+ "UNCAsIntranet" = dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\1]
+;Отключить запрос на копирование\перенос файлов в Intranet
+ "Flags" = dword:000000d3
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3]
+"CurrentLevel"=dword:00000000
+"Flags"=dword:00000001
+;Download signed ActiveX controls
+"1001"=dword:00000000
+;Download unsigned ActiveX controls
+"1004"=dword:00000000
+;Run ActiveX controls and plugins
+"1200"=dword:00000000
+;Initialize and script ActiveX controls not marked as safe for scripting
+"1201"=dword:00000000
+;Allow scripting of Microsoft web browser control
+"1206"=dword:00000003
+;Allow previously unused ActiveX controls to run without prompt
+"1208"=dword:00000000
+;Allow scriptlets
+"1209"=dword:00000000
+;Display video and animation on a webpage that does not use external media player
+"120A"=dword:00000000
+;Only allow approved domains to use ActiveX without prompt
+"120B"=dword:00000000
+;Active scripting
+"1400"=dword:00000000
+;Scripting of JAVA applets
+"1402"=dword:00000000
+;Script ActiveX controls marked safe for scripting [restart required]
+"1405"=dword:00000000
+;Access data sources across domains
+"1406"=dword:00000003
+;Allow Progammatic clipboard access
+"1407"=dword:00000003
+;Enable XSS filter
+"1409"=dword:00000003
+;Submit non-encrypted form data
+"1601"=dword:00000000
+;Font download
+"1604"=dword:00000003
+;Run JAVA
+"1605"=dword:00000000
+;Userdata persistence
+"1606"=dword:00000003
+;Navigate windows and frames across different domains
+"1607"=dword:00000003
+;Allow META REFRESH
+"1608"=dword:00000003
+;Display mixed content
+"1609"=dword:00000000
+;Include local directory path when uploading files to a server
+"160A"=dword:00000003
+;Installation of desktop items
+;"1800"=dword:00000003
+;Drag'n'Drop or Copy'n'Paste files
+"1802"=dword:00000001
+;File download
+"1803"=dword:00000003
+;Launching programms and files in an IFRAME
+"1804"=dword:00000003
+;Launching applications and unsafe files
+"1806"=dword:00000000
+;Use Pop-up blocker
+"1809"=dword:00000000
+;User authentication
+"1A00"=dword:00000000
+;Allow persistent cookies that are stored on your computer
+"1A02"=dword:00000003
+;Allow per-session cookies (not stored)
+"1A03"=dword:00000003
+;Don't prompt for client certificate selection when no certificates or only one certificate exists
+"1A04"=dword:00000000
+;Allow 3rd party persistent cookies
+"1A05"=dword:00000003
+;Allow 3rd party session cookies
+"1A06"=dword:00000003
+;JAVA Permissions
+"1C00"=dword:00000000
+;Binary and script behaviors
+"2000"=dword:00000000
+;Permissions for Components with Manifests
+"2007"=dword:00000003
+;Open files based on content, not extension
+"2100"=dword:00000003
+;Web sites in less priveleged web content zone can navigate into this zone
+"2101"=dword:00000003
+;Allow script-initiated windows without size or position constraints
+"2102"=dword:00000003
+;Allow status bar updates via script
+"2103"=dword:00000000
+;Allow websites to open windows without address or status bars
+"2104"=dword:00000000
+;Allow websites to prompt for information using scripted windows
+"2105"=dword:00000000
+;Automatic prompting for file downloads
+"2200"=dword:00000003
+;Automatic prompting for ActiveX controls
+"2201"=dword:00000000
+;Allow webpages to use restricted protocols for active content
+"2300"=dword:00000003
+;Use Smartscreen filter
+"2301"=dword:00000000
+;XAML browser applications
+"2400"=dword:00000003
+;XPS documents
+"2401"=dword:00000003
+;Loose XAML
+"2402"=dword:00000003
+;Enable .NET framework setup
+"2600"=dword:00000003
+;Allow ActiveX filtering
+"2702"=dword:00000000
+;"2703"=dword:00000003 - no description
+;Allow dragging of content between domains into the same window
+"2708"=dword:00000000
+;Allow dragging of content between domains into the separate window
+"2709"=dword:00000000

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Server port="8005" shutdown="SHUTDOWN">
+	<Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on"/>
+	<Listener className="org.apache.catalina.core.JasperListener"/>
+	<Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+	<Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+	<Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+	<GlobalNamingResources>
+		<!--
+		<Resource name="UserDatabase" 
+		          auth="Container" 
+				  type="org.apache.catalina.UserDatabase" 
+				  description="User database that can be updated and saved" 
+				  factory="org.apache.catalina.users.MemoryUserDatabaseFactory" 
+				  pathname="conf/tomcat-users.xml"/>
+		-->
+	</GlobalNamingResources>
+	<Service name="Catalina">
+		<Connector port="8080" protocol="HTTP/1.1" acceptCount="3" maxConnections="100" 
+				   maxHeaderCount="100" maxHttpHeaderSize="16000" maxThread="1000" 
+				   maxTrailerSize="-1" minSpareThreads="50" socket.appReadBufSize="24000" 
+				   socket.appWriteBufSize="24000" socket.bufferPoolSize="-1" 
+				   socket.processorCache="-1" socket.socketWrapperCache="-1" 
+				   useCaches="false" 
+				   compressableMimeType="text/html,text/xml,text/css,text/javascript,application/x-javascript,application/javascript" 
+				   compression="on" compressionMinSize="128" enableLookups="false" 
+				   connectionTimeout="20000" redirectPort="8443" URIEncoding="UTF-8"/>
+		<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" URIEncoding="UTF-8"/>
+		<Engine name="Catalina" defaultHost="localhost">
+			<Realm className="org.apache.catalina.realm.LockOutRealm">
+				<Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+			</Realm>
+			<Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
+				<Valve className="org.apache.catalina.valves.AccessLogValve" 
+				       directory="logs" 
+					   prefix="localhost_access_log." 
+					   suffix=".txt" 
+					   pattern="%t &quot;%U&quot; %s %b"/>
+			</Host>
+		</Engine>
+	</Service>
+</Server>

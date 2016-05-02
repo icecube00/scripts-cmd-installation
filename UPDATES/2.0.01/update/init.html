@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:with="res=('/resources-' + ${config.version})" lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title th:text="'СИРИУС Терминал. Версия ' + ${config.version} + '.'"></title>
+    <link rel="stylesheet" href="../../resources/style-800x600.css" th:href="@{${res}+'/style-800x600.css'}" />
+    <script src="../../resources/split.js" th:src="@{${res}+'/split.js'}"></script>
+    <script src="../../resources/jquery-1.10.2.min.js" th:src="@{${res}+'/jquery-1.10.2.min.js'}" ></script>
+    <script src="../../resources/jquery-ui-1.9.2.custom.min.js" th:src="@{${res}+'/jquery-ui-1.9.2.custom.min.js'}"></script>
+    <script src="../../resources/jquery.spritely.js" th:src="@{${res}+'/jquery.spritely.js'}"></script>
+    <script src="../../resources/logger.js" th:src="@{${res}+'/logger.js'}"></script>
+    <script src="../../resources/exit.js" th:src="@{${res}+'/exit.js'}"></script>
+    <script src="../../resources/loading.js" th:src="@{${res}+'/loading.js'}"></script>
+    <script src="../../resources/timeout.js" th:src="@{${res}+'/timeout.js'}"></script>
+    <script src="../../resources/messages_ru.js" th:src="@{${res}+'/messages_' + (${locale} ? ${locale} : 'ru') + '.js'}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        Logger.url = /*[[@{/log}]]*/'/log';
+        window.onerror = function(message, url, line) {
+            Logger.error(message, url, line);
+            window.location.href = /*[[@{/error}]]*/'/error';
+        };
+        Constants.support = /*[[${support}]]*/'Служба поддержки +7 (495) 500-00-05';
+        Timeout.URL_END_OK = /*[[@{/end-ok}]]*/'/end-ok';
+        Timeout.URL_END_CANCEL = /*[[@{/end-cancel}]]*/'/end-cancel';
+        Timeout.page = /*[[${config.pageTimeout}]]*/120000;
+        Timeout.communication = /*[[${config.communicationTimeout}]]*/10000;
+        Logger.debug('Инициализация констант завершена.', 'init.html');
+        /*]]>*/
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(window).load(function() {
+            $('.icon-waiting').sprite({fps: 10, no_of_frames: 30});
+            Timeout.emergencyTimeout();
+
+            var TEST_MODE = /*[[${config.test}]]*/true;
+            var TEST_PAN = /*[[${config.pan}]]*/'12345';
+            var pan, opcode, devices, amount, b, c, offset, state;
+
+            Logger.debug('Пытаемся загрузить PAN...', 'init.html');
+            try {
+                pan = NDC_exch.NDCGetValue('NDC', 'PAN');
+				Logger.debug(pan.length, 'init.html');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                pan = 'COULD_NOT_GET_PAN';
+            }
+            Logger.debug('Пытаемся загрузить OPCODE...', 'init.html');
+            try {
+                opcode = NDC_exch.NDCGetValue('NDC', 'OPCODE');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                opcode = 'COULD_NOT_GET_OPCODE';
+            }
+			Logger.debug(opcode, 'init.html');
+            Logger.debug('Пытаемся загрузить ActiveDevicesMask...', 'init.html');
+            try {
+                devices = NDC_exch.NDCGetValue('NDC', 'ActiveDevicesMask');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                devices = 'COULD_NOT_GET_ACTIVE_DEVICES_MASK';
+            }
+			Logger.debug(devices, 'init.html');
+            Logger.debug('Пытаемся загрузить Amount...', 'init.html');
+            try {
+                amount = NDC_exch.NDCGetValue('NDC', 'Amount');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                amount = 'COULD_NOT_GET_AMOUNT';
+            }
+			Logger.debug(amount, 'init.html');
+            Logger.debug('Пытаемся загрузить B...', 'init.html');
+            try {
+                b = NDC_exch.NDCGetValue('NDC', 'B');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                b = 'COULD_NOT_GET_B';
+            }
+			Logger.debug(b, 'init.html');
+            Logger.debug('Пытаемся загрузить C...', 'init.html');
+            try {
+                c = NDC_exch.NDCGetValue('NDC', 'C');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                c = 'COULD_NOT_GET_C';
+            }
+			Logger.debug(c, 'init.html');
+            Logger.debug('Пытаемся загрузить CurrLangOffset...', 'init.html');
+            try {
+                offset = NDC_exch.NDCGetValue('NDC', 'CurrLangOffset');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                offset = 'COULD_NOT_GET_CURRENT_LANG_OFFSET';
+            }
+			Logger.debug(offset, 'init.html');
+            Logger.debug('Пытаемся загрузить CurrState...', 'init.html');
+            try {
+                state = NDC_exch.NDCGetValue('NDC', 'CurrState');
+            } catch (e) {
+			    Logger.error('Ошибка: ' + e.name + ', сообщение: ' + e.message, 'init.html');
+                state = 'COULD_NOT_GET_CURRENT_STATE';
+            }
+			Logger.debug(state, 'init.html');
+
+			Logger.debug('Отправляем POST-запрос.', 'init.html');
+            if (TEST_MODE) {
+                // тестовый запуск
+                post(TEST_PAN, opcode, devices, amount, b, c, offset, state);
+            } else {
+                // боевой запуск
+                post(pan, opcode, devices, amount, b, c, offset, state);
+            }
+        });
+
+        function post(pan, opcode, devices, amount, b, c, offset, state) {
+		Logger.debug('Вошли в процедуру POST', 'init.html');
+		    try {			
+				$('#pan').val(pan);
+				$('#opcode').val(opcode);
+				$('#devices').val(devices);
+				$('#amount').val(amount);
+				$('#b').val(b);
+				$('#c').val(c);
+				$('#offset').val(offset);
+				$('#state').val(state);
+		    } catch (e) {
+			    Logger.error('Ошибка установки параметров POST-запроса: ' + e.name + ' -> ' + e.message, 'init.html');
+			}
+			try {
+                $('#form').submit();
+		    } catch (e) {
+			    Logger.error('Ошибка отправки POST-запроса: ' + e.name + ' -> ' + e.message, 'init.html');    
+			}
+        }
+        /*]]>*/
+    </script>
+</head>
+
+<body>
+    <div class="sirius-wrapper">
+        <div id="loading" class="sirius-body sirius-body-end">
+            <div class="sirius-message">
+                <div class="caption">
+                    <p>Пожалуйста, ждите.</p>
+                    <p><ins class="icon-waiting"></ins></p>
+                </div>
+            </div>
+
+            <div th:if="${config.test}" th:include="fragments/test_mode :: test_mode"></div>
+        </div>
+
+        <!-- ActiveX компонент ПО TellMe для доступа к переменным NDC -->
+        <div style="display: none;">
+            <object id="NDC_exch" classid="CLSID:54BE17D8-96ED-4D92-B608-8118DD00964D"></object>
+        </div>
+
+        <form id="form" th:action="@{/start}" action="/start" method="post">
+            <input id="pan" type="hidden" name="pan"/>
+            <input id="opcode" type="hidden" name="opcode"/>
+            <input id="devices" type="hidden" name="devices"/>
+            <input id="amount" type="hidden" name="amount"/>
+            <input id="b" type="hidden" name="b"/>
+            <input id="c" type="hidden" name="c"/>
+            <input id="offset" type="hidden" name="offset"/>
+            <input id="state" type="hidden" name="state"/>
+        </form>
+    </div>
+</body>
+
+</html>

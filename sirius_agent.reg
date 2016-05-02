@@ -1,0 +1,10 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sirius agent]
+ "DisplayName"="Клиентское приложение Sirius"
+ "Publisher"="ЗАО Сбербанк Технологии"
+ "NoModify"=dword:00000001
+ "NoRepair"=dword:00000001
+ "UninstallString"="C:\\install\\sirius_agent\\setup.cmd uninstall"
+ "DisplayIcon"="C:\\install\\sirius_agent\\new_sirius.ico"
+ 
