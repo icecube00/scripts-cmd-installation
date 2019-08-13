@@ -1,8 +1,8 @@
 @echo off
-@rem Версия инсталлятора
+@rem ╨Т╨╡╤А╤Б╨╕╤П ╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤В╨╛╤А╨░
 set SetupVersion=2.02.000
 
-@rem Определяем текущую дату
+@rem ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╤П╨╡╨╝ ╤В╨╡╨║╤Г╤Й╤Г╤О ╨┤╨░╤В╤Г
 for /f "tokens=1-4 delims=. " %%a in ('echo %DATE:/=.%') do (
  if [%%d]==[] (
   set YEAR=%%c
@@ -17,114 +17,114 @@ for /f "tokens=1-4 delims=. " %%a in ('echo %DATE:/=.%') do (
  )
 )
 
-@rem Определяем текущее время
+@rem ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╤П╨╡╨╝ ╤В╨╡╨║╤Г╤Й╨╡╨╡ ╨▓╤А╨╡╨╝╤П
 set HOURS=%Time:~0,2%
 set MINUTES=%Time:~3,2%
 
-@rem Имя файла для вывода лога исполнения скрипта
+@rem ╨Ш╨╝╤П ╤Д╨░╨╣╨╗╨░ ╨┤╨╗╤П ╨▓╤Л╨▓╨╛╨┤╨░ ╨╗╨╛╨│╨░ ╨╕╤Б╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П ╤Б╨║╤А╨╕╨┐╤В╨░
 set OUTPUT="%YEAR%_%MONTH%_%DAY%_%HOURS: =0%%MINUTES%_sirius_agent.log"
 
-@rem Проверяем разрядность ОС.
+@rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╤А╨░╨╖╤А╤П╨┤╨╜╨╛╤Б╤В╤М ╨Ю╨б.
 if defined CommonProgramW6432 (set osversion=64) else (set osversion=32)
 
-@rem Проверяем если включено перенаправление вывода в файл лога указанный выше
+@rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╡╤Б╨╗╨╕ ╨▓╨║╨╗╤О╤З╨╡╨╜╨╛ ╨┐╨╡╤А╨╡╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╨▓╤Л╨▓╨╛╨┤╨░ ╨▓ ╤Д╨░╨╣╨╗ ╨╗╨╛╨│╨░ ╤Г╨║╨░╨╖╨░╨╜╨╜╤Л╨╣ ╨▓╤Л╤И╨╡
 if [%STDOUT_REDIRECTED%]==[] (
  set STDOUT_REDIRECTED=yes
- @rem Очищаем экран
+ @rem ╨Ю╤З╨╕╤Й╨░╨╡╨╝ ╤Н╨║╤А╨░╨╜
  cls
- @rem Выполняем файл скрипта, но с перенаправлением вывода
+ @rem ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╨╝ ╤Д╨░╨╣╨╗ ╤Б╨║╤А╨╕╨┐╤В╨░, ╨╜╨╛ ╤Б ╨┐╨╡╤А╨╡╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╨╡╨╝ ╨▓╤Л╨▓╨╛╨┤╨░
  cmd.exe /c %0 %* >%OUTPUT% 2>&1
- @rem Завершаем выполнение скрипта с кодом возврата ERRORLEVEL
+ @rem ╨Ч╨░╨▓╨╡╤А╤И╨░╨╡╨╝ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ ╤Б╨║╤А╨╕╨┐╤В╨░ ╤Б ╨║╨╛╨┤╨╛╨╝ ╨▓╨╛╨╖╨▓╤А╨░╤В╨░ ERRORLEVEL
  exit /b %ERRORLEVEL%
 )
 
-@rem Переходим в директорию C:\Install\sirius_agent\. Она прибита гвоздями.
+@rem ╨Я╨╡╤А╨╡╤Е╨╛╨┤╨╕╨╝ ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О C:\Install\sirius_agent\. ╨Ю╨╜╨░ ╨┐╤А╨╕╨▒╨╕╤В╨░ ╨│╨▓╨╛╨╖╨┤╤П╨╝╨╕.
 cd "C:\Install\sirius_agent\"
 
 call:writetolog "****************************************************"
-call:writetolog " Инсталлятор SIRIUS агента. Версия %SetupVersion%"
+call:writetolog " ╨Ш╨╜╤Б╤В╨░╨╗╨╗╤П╤В╨╛╤А SIRIUS ╨░╨│╨╡╨╜╤В╨░. ╨Т╨╡╤А╤Б╨╕╤П %SetupVersion%"
 
-@rem Вызов блока подготовки переменных среды для процесса установки
+@rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╨╛╨┤╨│╨╛╤В╨╛╨▓╨║╨╕ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е ╤Б╤А╨╡╨┤╤Л ╨┤╨╗╤П ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕
 call:prepareEnv 0
 
-@rem Проверяем региональные настройки и выставляем значение для поиска информации о скопированных файлах
+@rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╤А╨╡╨│╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨╕ ╨▓╤Л╤Б╤В╨░╨▓╨╗╤П╨╡╨╝ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡ ╨┤╨╗╤П ╨┐╨╛╨╕╤Б╨║╨░ ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╨╕ ╨╛ ╤Б╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╤Е ╤Д╨░╨╣╨╗╨░╤Е
 call:checkLocale
 if %errorlevel% equ 0 set copied="copied"
-if %errorlevel% equ 1 set copied="скопировано"
-if %errorlevel% equ 100 set copied="некорректная локаль"
+if %errorlevel% equ 1 set copied="╤Б╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╛"
+if %errorlevel% equ 100 set copied="╨╜╨╡╨║╨╛╤А╤А╨╡╨║╤В╨╜╨░╤П ╨╗╨╛╨║╨░╨╗╤М"
 
-@rem Проверяем версию IE. Сейчас она дожна быть не ниже 8.0
+@rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨▓╨╡╤А╤Б╨╕╤О IE. ╨б╨╡╨╣╤З╨░╤Б ╨╛╨╜╨░ ╨┤╨╛╨╢╨╜╨░ ╨▒╤Л╤В╤М ╨╜╨╡ ╨╜╨╕╨╢╨╡ 8.0
 call:checkIE 8.0
-@rem Если проверка версии IE прошла успешно, проверяем поставщика ПО
+@rem ╨Х╤Б╨╗╨╕ ╨┐╤А╨╛╨▓╨╡╤А╨║╨░ ╨▓╨╡╤А╤Б╨╕╨╕ IE ╨┐╤А╨╛╤И╨╗╨░ ╤Г╤Б╨┐╨╡╤И╨╜╨╛, ╨┐╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨┐╨╛╤Б╤В╨░╨▓╤Й╨╕╨║╨░ ╨Я╨Ю
 if %errorlevel% equ 0 call:checkVendor %1
 
-@rem Если переменная continue равна false - завершаем работу скрипта с кодом возврата 99
+@rem ╨Х╤Б╨╗╨╕ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П continue ╤А╨░╨▓╨╜╨░ false - ╨╖╨░╨▓╨╡╤А╤И╨░╨╡╨╝ ╤А╨░╨▒╨╛╤В╤Г ╤Б╨║╤А╨╕╨┐╤В╨░ ╤Б ╨║╨╛╨┤╨╛╨╝ ╨▓╨╛╨╖╨▓╤А╨░╤В╨░ 99
 if [%continue%]==[false] (
- @rem Возвращаем переменные среды в исходное состояние
+ @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
  call:prepareEnv 1
  call:writetolog "****************************************************"
  exit /b 99
  goto:EOF
 )
 
-@rem Если скрипт был вызван без параметров, выполняем блок main.
+@rem ╨Х╤Б╨╗╨╕ ╤Б╨║╤А╨╕╨┐╤В ╨▒╤Л╨╗ ╨▓╤Л╨╖╨▓╨░╨╜ ╨▒╨╡╨╖ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓, ╨▓╤Л╨┐╨╛╨╗╨╜╤П╨╡╨╝ ╨▒╨╗╨╛╨║ main.
 if [%1]==[] (
  call:main
 ) else (
- @rem Иначе, пытаемся найти блок с названием параметра
+ @rem ╨Ш╨╜╨░╤З╨╡, ╨┐╤Л╤В╨░╨╡╨╝╤Б╤П ╨╜╨░╨╣╤В╨╕ ╨▒╨╗╨╛╨║ ╤Б ╨╜╨░╨╖╨▓╨░╨╜╨╕╨╡╨╝ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨░
  goto:%1
 )
-@rem Если все было хорошо, то сюда мы не должны были попасть.
-@rem Возвращаем переменные среды в исходное состояние
+@rem ╨Х╤Б╨╗╨╕ ╨▓╤Б╨╡ ╨▒╤Л╨╗╨╛ ╤Е╨╛╤А╨╛╤И╨╛, ╤В╨╛ ╤Б╤О╨┤╨░ ╨╝╤Л ╨╜╨╡ ╨┤╨╛╨╗╨╢╨╜╤Л ╨▒╤Л╨╗╨╕ ╨┐╨╛╨┐╨░╤Б╤В╤М.
+@rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
 call:prepareEnv 1
-call:writetolog "ERROR: Ошибка инсталляции агента SIRIUS."
+call:writetolog "ERROR: ╨Ю╤И╨╕╨▒╨║╨░ ╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕ ╨░╨│╨╡╨╜╤В╨░ SIRIUS."
 goto:EOF
 
-@rem Основной блок инсталлятора
+@rem ╨Ю╤Б╨╜╨╛╨▓╨╜╨╛╨╣ ╨▒╨╗╨╛╨║ ╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤В╨╛╤А╨░
 :main
- call:writetolog "	Устанавливаем таймаут на опрос NETBIOS."
- @rem Вызов блока настройки параметров NETBIOS.
+ call:writetolog "	╨г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╤В╨░╨╣╨╝╨░╤Г╤В ╨╜╨░ ╨╛╨┐╤А╨╛╤Б NETBIOS."
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓ NETBIOS.
  call:setParams
- @rem Вызов блока установки JRE.
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ JRE.
  call:java
- @rem Если JRE успешно установлена, вызываем блок установки СП Tomcat.
+ @rem ╨Х╤Б╨╗╨╕ JRE ╤Г╤Б╨┐╨╡╤И╨╜╨╛ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨░, ╨▓╤Л╨╖╤Л╨▓╨░╨╡╨╝ ╨▒╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨б╨Я Tomcat.
  if %errorlevel% equ 0 call:tomcat
- @rem Проверяем наличие записи в реестре о дате установки агента СИРИУС
+ @rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╜╨░╨╗╨╕╤З╨╕╨╡ ╨╖╨░╨┐╨╕╤Б╨╕ ╨▓ ╤А╨╡╨╡╤Б╤В╤А╨╡ ╨╛ ╨┤╨░╤В╨╡ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨░╨│╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
  for /f "usebackq skip=4 tokens=2*" %%i in (`@reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sirius agent" /v "InstallDate"`) do ( 
-  @rem Если дата совпадает с текущей, переходим к блоку Finish
+  @rem ╨Х╤Б╨╗╨╕ ╨┤╨░╤В╨░ ╤Б╨╛╨▓╨┐╨░╨┤╨░╨╡╤В ╤Б ╤В╨╡╨║╤Г╤Й╨╡╨╣, ╨┐╨╡╤А╨╡╤Е╨╛╨┤╨╕╨╝ ╨║ ╨▒╨╗╨╛╨║╤Г Finish
   if [%%j]==[%YEAR%%MONTH%%DAY%] goto:Finish
  )
 
-@rem Блок проверки наличия кэшированного экрана и его удаление, при необходимости
+@rem ╨С╨╗╨╛╨║ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨╜╨░╨╗╨╕╤З╨╕╤П ╨║╤Н╤И╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨│╨╛ ╤Н╨║╤А╨░╨╜╨░ ╨╕ ╨╡╨│╨╛ ╤Г╨┤╨░╨╗╨╡╨╜╨╕╨╡, ╨┐╤А╨╕ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╨╕
 :checkCached
 for /f "tokens=2 delims== " %%a in ('type "C:\install\sirius_agent\sirius-atm.properties"^|find "cache.file"') do (
  set cachefile=%%~a
 )
 if exist "%cachefile:/=\%" (
- call:writetolog "		Чистим кэш %cachefile:/=\%"
+ call:writetolog "		╨з╨╕╤Б╤В╨╕╨╝ ╨║╤Н╤И %cachefile:/=\%"
  del %cachefile:/=\% /q
 )
 goto:EOF
 
-@rem Проверка версии IE
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨▓╨╡╤А╤Б╨╕╨╕ IE
 :checkIE
- @rem Получение полного пути к первому экземпляру файла iexplore.exe начиная с папки %ProgramFiles% (включая вложенные)
+ @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨┐╨╛╨╗╨╜╨╛╨│╨╛ ╨┐╤Г╤В╨╕ ╨║ ╨┐╨╡╤А╨▓╨╛╨╝╤Г ╤Н╨║╨╖╨╡╨╝╨┐╨╗╤П╤А╤Г ╤Д╨░╨╣╨╗╨░ iexplore.exe ╨╜╨░╤З╨╕╨╜╨░╤П ╤Б ╨┐╨░╨┐╨║╨╕ %ProgramFiles% (╨▓╨║╨╗╤О╤З╨░╤П ╨▓╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡)
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js getPath "iexplore.exe" "%ProgramFiles%" true') do (set pathIE=%%a)
- @rem Получение версии файла iexplore.exe
+ @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨▓╨╡╤А╤Б╨╕╨╕ ╤Д╨░╨╣╨╗╨░ iexplore.exe
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js checkFileVersion "%pathIE%" iexplore.exe %copied% fileV') do (set IEVersion=%%a)
  if %IEVersion% GEQ %1 (
-  call:writetolog " Версия Internet Explorer (%IEVersion%)"
-  call:writetolog " Исправляем проблемы инсталляции IE8. regsvr32 actxprxy.dll"
+  call:writetolog " ╨Т╨╡╤А╤Б╨╕╤П Internet Explorer (%IEVersion%)"
+  call:writetolog " ╨Ш╤Б╨┐╤А╨░╨▓╨╗╤П╨╡╨╝ ╨┐╤А╨╛╨▒╨╗╨╡╨╝╤Л ╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕ IE8. regsvr32 actxprxy.dll"
   call regsvr32 /s actxprxy.dll
   exit /b 0
  ) else (
-  call:writetolog "ERROR: Версия Internet Explorer (%IEVersion%) ниже минимально допустимой (%1)"
+  call:writetolog "ERROR: ╨Т╨╡╤А╤Б╨╕╤П Internet Explorer (%IEVersion%) ╨╜╨╕╨╢╨╡ ╨╝╨╕╨╜╨╕╨╝╨░╨╗╤М╨╜╨╛ ╨┤╨╛╨┐╤Г╤Б╤В╨╕╨╝╨╛╨╣ (%1)"
   if not defined continue set continue=false
   exit /b 1
  )
 goto:EOF
 
-@rem Проверка версии JRE
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨▓╨╡╤А╤Б╨╕╨╕ JRE
 :checkJava
  for /f "usebackq tokens=2*" %%i in (`@java -version 2^>^&1^|find "version"`) do (
   set version=%%~j
@@ -135,222 +135,222 @@ goto:EOF
  if %JAVAVersion% GEQ %1 (
   set updateJava=false
   if ["%JAVA_HOME%"]==[""] (
-   @rem Установка переменной среды JAVA_HOME (два раза, на всякий случай, иногда не срабатывает даже так)
+   @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л JAVA_HOME (╨┤╨▓╨░ ╤А╨░╨╖╨░, ╨╜╨░ ╨▓╤Б╤П╨║╨╕╨╣ ╤Б╨╗╤Г╤З╨░╨╣, ╨╕╨╜╨╛╨│╨┤╨░ ╨╜╨╡ ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╡╤В ╨┤╨░╨╢╨╡ ╤В╨░╨║)
    call:setEnvVar "JAVA_HOME" "%ProgramFiles%\Java\jre7"
    set "JAVA_HOME=%ProgramFiles%\Java\jre7"
   )
-  if not [%1]==[0] call:writetolog "	Установленная версия JRE(%JAVAVersion%) не требует обновления."
+  if not [%1]==[0] call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╨░╤П ╨▓╨╡╤А╤Б╨╕╤П JRE(%JAVAVersion%) ╨╜╨╡ ╤В╤А╨╡╨▒╤Г╨╡╤В ╨╛╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П."
   exit /b 0
  ) else (
   set updateJava=true
   if [%JAVAVersion%]==[""] (
-   call:writetolog "	JRE не установлен. Необходимо установить JRE 7 update 80."
+   call:writetolog "	JRE ╨╜╨╡ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜. ╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М JRE 7 update 80."
    exit /b 1
   )
-  call:writetolog "	Необходимо обновить версию JRE(%JAVAVersion%) до %1."
-  @rem Чистим лог установки JRE при наличии
+  call:writetolog "	╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨╛╨▒╨╜╨╛╨▓╨╕╤В╤М ╨▓╨╡╤А╤Б╨╕╤О JRE(%JAVAVersion%) ╨┤╨╛ %1."
+  @rem ╨з╨╕╤Б╤В╨╕╨╝ ╨╗╨╛╨│ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ JRE ╨┐╤А╨╕ ╨╜╨░╨╗╨╕╤З╨╕╨╕
   if exist C:\install\sirius_agent\jre_install.log del C:\install\sirius_agent\jre_install.log /q /f
   exit /b 1
  )
 goto:EOF
 
-@rem Проверка региональных настроек
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╤А╨╡╨│╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╤Е ╨╜╨░╤Б╤В╤А╨╛╨╡╨║
 :checkLocale
  %wmicpath% os get oslanguage|find "1033" >NUL && exit /b 0
  %wmicpath% os get oslanguage|find "1049" >NUL && exit /b 1
 exit /b 100
 
-@rem Проверка СП Tomcat
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨б╨Я Tomcat
 :checkTomcat
- @rem Останавливаем сервис Tomcat
+ @rem ╨Ю╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╤Б╨╡╤А╨▓╨╕╤Б Tomcat
  net start|find /I "Tomcat7" && call net stop Tomcat7 > NUL 2>&1
- @rem Получаем версию СП Tomcat
+ @rem ╨Я╨╛╨╗╤Г╤З╨░╨╡╨╝ ╨▓╨╡╤А╤Б╨╕╤О ╨б╨Я Tomcat
  for /f "usebackq tokens=1* DELIMS=/" %%i in (`@JAVA -classpath "%tomcat_home%\lib\catalina.jar" org.apache.catalina.util.ServerInfo 2^>^&1^|find "Apache Tomcat"`) do (
   if not [%%j]==[] set TOMCATVersion=%%j
  )
 
  if [%TOMCATVersion%]==[] (
-  call:writetolog " Tomcat не установлен."
+  call:writetolog " Tomcat ╨╜╨╡ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜."
   set updateTomcat=true
   goto:EOF
  )
- call:writetolog " Установлен Tomcat версии %TOMCATVersion%." 
+ call:writetolog " ╨г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ Tomcat ╨▓╨╡╤А╤Б╨╕╨╕ %TOMCATVersion%." 
 
  if %TOMCATVersion% GEQ %1 (
   set updateTomcat=false
-  call:writetolog " Обновление Tomcat не требуется"
+  call:writetolog " ╨Ю╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╨╡ Tomcat ╨╜╨╡ ╤В╤А╨╡╨▒╤Г╨╡╤В╤Б╤П"
  ) else (
   set updateTomcat=true
-  call:writetolog " Необходимо обновить Tomcat до версии %1"
+  call:writetolog " ╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨╛╨▒╨╜╨╛╨▓╨╕╤В╤М Tomcat ╨┤╨╛ ╨▓╨╡╤А╤Б╨╕╨╕ %1"
  )
 goto:EOF
 
-@rem Проверка поставщика ППО
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨┐╨╛╤Б╤В╨░╨▓╤Й╨╕╨║╨░ ╨Я╨Я╨Ю
 :checkVendor
  if [%~1]==[help] goto:EOF
  if [%~1]==[uninstall] goto:EOF
- call:writetolog " Проверка поддержки WEB-EXT."
+ call:writetolog " ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨┐╨╛╨┤╨┤╨╡╤А╨╢╨║╨╕ WEB-EXT."
  if not exist C:\SCS\ATM_h\ATM_WEB.exe (
-  call:writetolog "ERROR: ПО TellMe не обнаружено."
+  call:writetolog "ERROR: ╨Я╨Ю TellMe ╨╜╨╡ ╨╛╨▒╨╜╨░╤А╤Г╨╢╨╡╨╜╨╛."
   if not defined continue set continue=TellMe
  ) else ( 
   call:checkWebExt
  )
 goto:EOF
 
-@rem Проверка версии TellME, согласно версии WebExt
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨▓╨╡╤А╤Б╨╕╨╕ TellME, ╤Б╨╛╨│╨╗╨░╤Б╨╜╨╛ ╨▓╨╡╤А╤Б╨╕╨╕ WebExt
 :checkWebExt
- @rem Получение полного пути к первому экземпляру файла atm_web.exe начиная с папки C:\SCS\ATM_h (включая вложенные)
+ @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨┐╨╛╨╗╨╜╨╛╨│╨╛ ╨┐╤Г╤В╨╕ ╨║ ╨┐╨╡╤А╨▓╨╛╨╝╤Г ╤Н╨║╨╖╨╡╨╝╨┐╨╗╤П╤А╤Г ╤Д╨░╨╣╨╗╨░ atm_web.exe ╨╜╨░╤З╨╕╨╜╨░╤П ╤Б ╨┐╨░╨┐╨║╨╕ C:\SCS\ATM_h (╨▓╨║╨╗╤О╤З╨░╤П ╨▓╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡)
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js getPath "atm_web.exe" "C:\SCS\ATM_h" true') do (set pathFile=%%a)
- @rem Получение версии файла atm_web.exe
+ @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨▓╨╡╤А╤Б╨╕╨╕ ╤Д╨░╨╣╨╗╨░ atm_web.exe
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js checkFileVersion "%pathFile%" atm_web.exe %copied% productV') do (
   set tellMeVersion=%%a
  )
- call:writetolog " Версия TellME (%tellMeVersion%)"
- @rem Начиная с версии 029016002092 - web-ext включен по-умолчанию и не требует наличия ключей
+ call:writetolog " ╨Т╨╡╤А╤Б╨╕╤П TellME (%tellMeVersion%)"
+ @rem ╨Э╨░╤З╨╕╨╜╨░╤П ╤Б ╨▓╨╡╤А╤Б╨╕╨╕ 029016002092 - web-ext ╨▓╨║╨╗╤О╤З╨╡╨╜ ╨┐╨╛-╤Г╨╝╨╛╨╗╤З╨░╨╜╨╕╤О ╨╕ ╨╜╨╡ ╤В╤А╨╡╨▒╤Г╨╡╤В ╨╜╨░╨╗╨╕╤З╨╕╤П ╨║╨╗╤О╤З╨╡╨╣
  if %tellMeVersion:.=% GEQ 029016002092 (
   if not defined continue set continue=TellMe
-  call:writetolog " Проверка WebEXT не нужна."
+  call:writetolog " ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ WebEXT ╨╜╨╡ ╨╜╤Г╨╢╨╜╨░."
  ) else (
-  @rem Если версия ниже 029016002092 - проверяем в сегодняшнем ERL, что web-ext не отключен.
+  @rem ╨Х╤Б╨╗╨╕ ╨▓╨╡╤А╤Б╨╕╤П ╨╜╨╕╨╢╨╡ 029016002092 - ╨┐╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨▓ ╤Б╨╡╨│╨╛╨┤╨╜╤П╤И╨╜╨╡╨╝ ERL, ╤З╤В╨╛ web-ext ╨╜╨╡ ╨╛╤В╨║╨╗╤О╤З╨╡╨╜.
   find /I ":WEB-EXT" C:\%YEAR%%MONTH%%DAY%.erl|find /I "disabled" > NUL 2>&1
   if not %errorlevel%==0 (
    if not defined continue set continue=TellMe
-   call:writetolog " Обнаружено ПО TellMe с поддержкой WEB-EXT."
+   call:writetolog " ╨Ю╨▒╨╜╨░╤А╤Г╨╢╨╡╨╜╨╛ ╨Я╨Ю TellMe ╤Б ╨┐╨╛╨┤╨┤╨╡╤А╨╢╨║╨╛╨╣ WEB-EXT."
   ) else (
    if not defined continue set continue=TellMe
-   call:writetolog "ERROR: Обнаружено ПО TellMe без поддержки WEB-EXT."
+   call:writetolog "ERROR: ╨Ю╨▒╨╜╨░╤А╤Г╨╢╨╡╨╜╨╛ ╨Я╨Ю TellMe ╨▒╨╡╨╖ ╨┐╨╛╨┤╨┤╨╡╤А╨╢╨║╨╕ WEB-EXT."
   )
  )
 goto:EOF
 
-@rem Проверка наличия установленного wmic.exe
+@rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨╜╨░╨╗╨╕╤З╨╕╤П ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╨╛╨│╨╛ wmic.exe
 :checkWMIC
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js getPath "wmic.exe" "%SystemRoot%" false') do (set pathWMIC=%%a)
  if exist %pathWMIC%\wmic.exe (%pathWMIC%\wmic.exe os get oslanguage|find /i "wmic" && exit /b 999) else (exit /b 999)
 exit /b 0
 
-@rem Распаковка архива с графическими ресурсами клиента СИРИУС
+@rem ╨а╨░╤Б╨┐╨░╨║╨╛╨▓╨║╨░ ╨░╤А╤Е╨╕╨▓╨░ ╤Б ╨│╤А╨░╤Д╨╕╤З╨╡╤Б╨║╨╕╨╝╨╕ ╤А╨╡╤Б╤Г╤А╤Б╨░╨╝╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
 :copy_resources
  for /f "tokens=2 delims== " %%a in ('type "C:\install\sirius_agent\sirius-atm.properties"^|find "path.images"') do (
   set pathresources=%%~a
  )
- call:writetolog "		Необходимо положить ресурсы в папку %pathresources:/=\%"
+ call:writetolog "		╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨┐╨╛╨╗╨╛╨╢╨╕╤В╤М ╤А╨╡╤Б╤Г╤А╤Б╤Л ╨▓ ╨┐╨░╨┐╨║╤Г %pathresources:/=\%"
  rmdir /s /q "%pathresources:/=\%"
  mkdir "%pathresources:/=\%"
- call:writetolog "		Начинаем распаковку основных ресурсов в %pathresources%" >unpack_main_resources.log 2>&1
+ call:writetolog "		╨Э╨░╤З╨╕╨╜╨░╨╡╨╝ ╤А╨░╤Б╨┐╨░╨║╨╛╨▓╨║╤Г ╨╛╤Б╨╜╨╛╨▓╨╜╤Л╤Е ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓ ╨▓ %pathresources%" >unpack_main_resources.log 2>&1
  call rar x resources.rar -o+ -y -idp -inul "%pathresources:/=\%"\ >>unpack_main_resources.log 2>&1
- call:writetolog "		Распаковка завершена." >>unpack_main_resources.log 2>&1
+ call:writetolog "		╨а╨░╤Б╨┐╨░╨║╨╛╨▓╨║╨░ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░." >>unpack_main_resources.log 2>&1
 goto:EOF
  
-@rem Завершение процесса установки
+@rem ╨Ч╨░╨▓╨╡╤А╤И╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕
 :finish
- @rem Проверяем, и при необходимости запускаем, сервис Tomcat
+ @rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝, ╨╕ ╨┐╤А╨╕ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╨╕ ╨╖╨░╨┐╤Г╤Б╨║╨░╨╡╨╝, ╤Б╨╡╤А╨▓╨╕╤Б Tomcat
  net start|find /I "Tomcat7" > NUL 2>&1
  if not [%errorlevel%]==[0] call net start TomCat7 > NUL 2>&1
 
- call:writetolog "	Установка завершена."
+ call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░."
  call:writetolog "****************************************************"
- @rem Ожидаем ~ 3 секунды.
+ @rem ╨Ю╨╢╨╕╨┤╨░╨╡╨╝ ~ 3 ╤Б╨╡╨║╤Г╨╜╨┤╤Л.
  call:wait 3
- @rem Возвращаем переменные среды в исходное состояние
+ @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
  call:prepareEnv 1
  exit
 goto:EOF
 
-@rem Получение размера RAM
+@rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╤А╨░╨╖╨╝╨╡╤А╨░ RAM
 :getRAMsize
  for /f "tokens=*" %%a in ('cscript /NOLOGO %wmicpath% os get TotalVisibleMemorySize') do (
   if not defined RAMSize set /A RAMSize=%%a/1024
  )
- call:writetolog "Объем доступной оперативной памяти = %RAMSize% Мб"
+ call:writetolog "╨Ю╨▒╤К╨╡╨╝ ╨┤╨╛╤Б╤В╤Г╨┐╨╜╨╛╨╣ ╨╛╨┐╨╡╤А╨░╤В╨╕╨▓╨╜╨╛╨╣ ╨┐╨░╨╝╤П╤В╨╕ = %RAMSize% ╨Ь╨▒"
  set /A minRAMSize=%RAMSize%/64
  set /A maxRAMSize=%RAMSize%/4
  set /A midRAMSize=%RAMSize%/2
 goto:EOF
 
-@rem Описание допустимых параметров запуска скрипта
+@rem ╨Ю╨┐╨╕╤Б╨░╨╜╨╕╨╡ ╨┤╨╛╨┐╤Г╤Б╤В╨╕╨╝╤Л╤Е ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓ ╨╖╨░╨┐╤Г╤Б╨║╨░ ╤Б╨║╤А╨╕╨┐╤В╨░
 :help
  call:writetolog "****************************************************"
- call:writetolog " Синтаксис SETUP.CMD [параметр]"
- call:writetolog " параметры: java, tomcat, sirius, uninstall"
- call:writetolog " 	java	 	 - установка всего пакета = запуск без параметров"
- call:writetolog " 	tomcat	 	 - установка всего, кроме java"
- call:writetolog " 	sirius	 	 - установка только SIRIUS-ATM.WAR"
- call:writetolog " 	uninstall	 - удаление продукта."
- call:writetolog " 	uninstall silent - удаление без запросов."
- call:writetolog " 	help	 	 - это сообщение."
+ call:writetolog " ╨б╨╕╨╜╤В╨░╨║╤Б╨╕╤Б SETUP.CMD [╨┐╨░╤А╨░╨╝╨╡╤В╤А]"
+ call:writetolog " ╨┐╨░╤А╨░╨╝╨╡╤В╤А╤Л: java, tomcat, sirius, uninstall"
+ call:writetolog " 	java	 	 - ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨▓╤Б╨╡╨│╨╛ ╨┐╨░╨║╨╡╤В╨░ = ╨╖╨░╨┐╤Г╤Б╨║ ╨▒╨╡╨╖ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓"
+ call:writetolog " 	tomcat	 	 - ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨▓╤Б╨╡╨│╨╛, ╨║╤А╨╛╨╝╨╡ java"
+ call:writetolog " 	sirius	 	 - ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╤В╨╛╨╗╤М╨║╨╛ SIRIUS-ATM.WAR"
+ call:writetolog " 	uninstall	 - ╤Г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨┤╤Г╨║╤В╨░."
+ call:writetolog " 	uninstall silent - ╤Г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨▒╨╡╨╖ ╨╖╨░╨┐╤А╨╛╤Б╨╛╨▓."
+ call:writetolog " 	help	 	 - ╤Н╤В╨╛ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╨╡."
  call:writetolog "****************************************************"
- call:writetolog "Нажмите любую кнопку, что бы продолжить."
+ call:writetolog "╨Э╨░╨╢╨╝╨╕╤В╨╡ ╨╗╤О╨▒╤Г╤О ╨║╨╜╨╛╨┐╨║╤Г, ╤З╤В╨╛ ╨▒╤Л ╨┐╤А╨╛╨┤╨╛╨╗╨╢╨╕╤В╤М."
  pause >NUL
 goto:EOF
 
-@rem Блок установки JRE
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ JRE
 :installJava
  call:setJavaName "Java Runtime 7 update 80"
- @rem Останавливаем сервис Tomcat
- net start|find /I "Tomcat7" && call net stop Tomсat7
+ @rem ╨Ю╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╤Б╨╡╤А╨▓╨╕╤Б Tomcat
+ net start|find /I "Tomcat7" && call net stop Tom╤Бat7
  
- call:writetolog "	Установка %JAVAName%"
+ call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ %JAVAName%"
  call setup_jre.exe /s /v "/qn IEXPLORER=1 REBOOT=Suppress JAVAUPDATE=0 WEBSTARTICON=0 /L C:\install\sirius_agent\jre_install.log" > NUL 2>&1
- @rem Проверяем что JRE была установлена успешно.
+ @rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╤З╤В╨╛ JRE ╨▒╤Л╨╗╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨░ ╤Г╤Б╨┐╨╡╤И╨╜╨╛.
  find /I "completed successfully" C:\install\sirius_agent\jre_install.log > NUL
  if [%errorlevel%]==[0] (
-  @rem Устанавливаем перменную среды JAVA_HOME
+  @rem ╨г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╨┐╨╡╤А╨╝╨╡╨╜╨╜╤Г╤О ╤Б╤А╨╡╨┤╤Л JAVA_HOME
   call:setEnvVar "JAVA_HOME" "%ProgramFiles%\Java\jre7"
-  @rem Отключаем автозапуск JavaQuickStarterService
+  @rem ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨░╨▓╤В╨╛╨╖╨░╨┐╤Г╤Б╨║ JavaQuickStarterService
   net start|find /I "Java Quick Starter" && call net stop "Java Quick Starter" > NUL 2>&1
   sc config JavaQuickStarterService start= disabled
-  call:writetolog "	%JAVAName% успешно установлен"
+  call:writetolog "	%JAVAName% ╤Г╤Б╨┐╨╡╤И╨╜╨╛ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜"
   exit /b 0
  ) else (
-  call:writetolog "	Сбой установки %JAVAName%"
-  @rem Назначем GUID установленной JRE
+  call:writetolog "	╨б╨▒╨╛╨╣ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ %JAVAName%"
+  @rem ╨Э╨░╨╖╨╜╨░╤З╨╡╨╝ GUID ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╨╛╨╣ JRE
   if not defined currentGUID set currentGUID=2F0%osversion%17080FF
-  @rem Вызываем блок отката установки JRE
+  @rem ╨Т╤Л╨╖╤Л╨▓╨░╨╡╨╝ ╨▒╨╗╨╛╨║ ╨╛╤В╨║╨░╤В╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ JRE
   call:rollBack java
   call:writetolog "****************************************************"
-  @rem Возвращаем переменные среды в исходное состояние
+  @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
   call:prepareEnv 1
   goto:EOF
  )
 
-@rem Блок установки СП Tomcat
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨б╨Я Tomcat
 :installTomcat
- call:writetolog "	Установка Apache TomCat 7.0.xx"
- @rem Если текущая версия Tomcat известна, значит надо сначала удалить сервис
+ call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ Apache TomCat 7.0.xx"
+ @rem ╨Х╤Б╨╗╨╕ ╤В╨╡╨║╤Г╤Й╨░╤П ╨▓╨╡╤А╤Б╨╕╤П Tomcat ╨╕╨╖╨▓╨╡╤Б╤В╨╜╨░, ╨╖╨╜╨░╤З╨╕╤В ╨╜╨░╨┤╨╛ ╤Б╨╜╨░╤З╨░╨╗╨░ ╤Г╨┤╨░╨╗╨╕╤В╤М ╤Б╨╡╤А╨▓╨╕╤Б
  if not [%TOMCATVersion%]==[] call "%TOMCAT_HOME%\uninstall.exe" -ServiceName="Tomcat7" /S >NUL 2>&1
- @rem Запускаем молчаливую (/S) установку СП Tomcat
+ @rem ╨Ч╨░╨┐╤Г╤Б╨║╨░╨╡╨╝ ╨╝╨╛╨╗╤З╨░╨╗╨╕╨▓╤Г╤О (/S) ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╤Г ╨б╨Я Tomcat
  call setup_tomcat.exe /S
 
- @rem Получение полного пути к первому экземпляру файла Tomcat7.exe начиная с папки %ProgramFiles% (включая вложенные)
+ @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨┐╨╛╨╗╨╜╨╛╨│╨╛ ╨┐╤Г╤В╨╕ ╨║ ╨┐╨╡╤А╨▓╨╛╨╝╤Г ╤Н╨║╨╖╨╡╨╝╨┐╨╗╤П╤А╤Г ╤Д╨░╨╣╨╗╨░ Tomcat7.exe ╨╜╨░╤З╨╕╨╜╨░╤П ╤Б ╨┐╨░╨┐╨║╨╕ %ProgramFiles% (╨▓╨║╨╗╤О╤З╨░╤П ╨▓╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡)
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js getPath "Tomcat7.EXE" "%ProgramFiles%" false') do (set pathTomCat=%%a)
  
- @rem Установка переменной среды TOMCAT_HOME (два раза, на всякий случай, иногда не срабатывает даже так)
+ @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л TOMCAT_HOME (╨┤╨▓╨░ ╤А╨░╨╖╨░, ╨╜╨░ ╨▓╤Б╤П╨║╨╕╨╣ ╤Б╨╗╤Г╤З╨░╨╣, ╨╕╨╜╨╛╨│╨┤╨░ ╨╜╨╡ ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╡╤В ╨┤╨░╨╢╨╡ ╤В╨░╨║)
  if not defined TOMCAT_HOME call:setEnvVar "TOMCAT_HOME" "%pathTomCat%"
  if not defined TOMCAT_HOME set TOMCAT_HOME=%pathTomCat%
  
- @rem Вызов блока настройки СП Tomcat
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨б╨Я Tomcat
  call:setupTomcat
- @rem Если установка и настройка прошли успешно
+ @rem ╨Х╤Б╨╗╨╕ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨░ ╨┐╤А╨╛╤И╨╗╨╕ ╤Г╤Б╨┐╨╡╤И╨╜╨╛
  if %errorlevel% equ 0 (
-  call:writetolog "	Apache TomCat 7.0.xx успешно установлен"
-  @rem Вызов блока установки клиентского приложения
+  call:writetolog "	Apache TomCat 7.0.xx ╤Г╤Б╨┐╨╡╤И╨╜╨╛ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜"
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨║╨╗╨╕╨╡╨╜╤В╤Б╨║╨╛╨│╨╛ ╨┐╤А╨╕╨╗╨╛╨╢╨╡╨╜╨╕╤П
   call:sirius
  )
 goto:EOF
 
 :java
  call:writetolog "----------------------------------------------------"
- call:writetolog "	Проверяем наличие установленной JRE."
- @rem Вызов блока проверки версии JRE
+ call:writetolog "	╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╜╨░╨╗╨╕╤З╨╕╨╡ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╨╛╨╣ JRE."
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨▓╨╡╤А╤Б╨╕╨╕ JRE
  call:checkJava 17080
- @rem Если версия JRE не соответствует заданной, устанавливаем необходимую версию
+ @rem ╨Х╤Б╨╗╨╕ ╨▓╨╡╤А╤Б╨╕╤П JRE ╨╜╨╡ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╤Г╨╡╤В ╨╖╨░╨┤╨░╨╜╨╜╨╛╨╣, ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╤Г╤О ╨▓╨╡╤А╤Б╨╕╤О
  if %errorlevel% equ 1 goto:installJava
  exit /b 0
 goto:EOF
 
-@rem Блок логирования исполнения команды, которая пытается выводить echo в консоль
+@rem ╨С╨╗╨╛╨║ ╨╗╨╛╨│╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨╕╤Б╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П ╨║╨╛╨╝╨░╨╜╨┤╤Л, ╨║╨╛╤В╨╛╤А╨░╤П ╨┐╤Л╤В╨░╨╡╤В╤Б╤П ╨▓╤Л╨▓╨╛╨┤╨╕╤В╤М echo ╨▓ ╨║╨╛╨╜╤Б╨╛╨╗╤М
 :logCommand
  set second="%~2...."
  if [%second:~1,4%]==[find] (
@@ -364,114 +364,114 @@ goto:EOF
  )
 goto:EOF
 
-@rem Блок подготовки переменных среды
+@rem ╨С╨╗╨╛╨║ ╨┐╨╛╨┤╨│╨╛╤В╨╛╨▓╨║╨╕ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е ╤Б╤А╨╡╨┤╤Л
 :prepareEnv
  if [%1]==[0] (
-    @rem Включаем CScript по-умолчанию, воизбежание и воисполнение
+    @rem ╨Т╨║╨╗╤О╤З╨░╨╡╨╝ CScript ╨┐╨╛-╤Г╨╝╨╛╨╗╤З╨░╨╜╨╕╤О, ╨▓╨╛╨╕╨╖╨▒╨╡╨╢╨░╨╜╨╕╨╡ ╨╕ ╨▓╨╛╨╕╤Б╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡
     call cscript //H:CScript >NUL 2>&1
-	@rem Вызов блока установки региональных настроек
+	@rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╤А╨╡╨│╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╤Е ╨╜╨░╤Б╤В╤А╨╛╨╡╨║
     call:setRegional
  )
- @rem Вызов блока проверки WMIC
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ WMIC
  call:checkWMIC
  if [%errorlevel%]==[999] (
   set wmicpath=C:\install\sirius_agent\wmic.js
  ) else (
   set wmicpath=wmic
  )
- @rem Возвращаем HScript по-умолчанию, воизбежание и воисполнение
+ @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ HScript ╨┐╨╛-╤Г╨╝╨╛╨╗╤З╨░╨╜╨╕╤О, ╨▓╨╛╨╕╨╖╨▒╨╡╨╢╨░╨╜╨╕╨╡ ╨╕ ╨▓╨╛╨╕╤Б╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡
  if [%1]==[1] call cscript //H:WScript >NUL 2>&1
 goto:EOF
 
-@rem Блок обновления "особо вредных" переменных среды
+@rem ╨С╨╗╨╛╨║ ╨╛╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П "╨╛╤Б╨╛╨▒╨╛ ╨▓╤А╨╡╨┤╨╜╤Л╤Е" ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е ╤Б╤А╨╡╨┤╤Л
 :refreshVars
 if defined CommonProgramW6432 (set osversion=64) else (set osversion=32)
 if not defined currentGUID set currentGUID=2F0%osversion%17080FF
 set "JAVA_HOME=%ProgramFiles%\Java\jre7"
 goto:EOF
 
-@rem Блок отката установки
+@rem ╨С╨╗╨╛╨║ ╨╛╤В╨║╨░╤В╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕
 :rollBack
  if [%1]==[tomcat] (
-  @rem Останавливаем сервис Tomcat
-  net start|find /I "Tomcat7" && call net stop Tomсat7
+  @rem ╨Ю╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╤Б╨╡╤А╨▓╨╕╤Б Tomcat
+  net start|find /I "Tomcat7" && call net stop Tom╤Бat7
   
-  @rem Удаление переменной среды SIRIUS_ATM_PROPERTIES
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л SIRIUS_ATM_PROPERTIES
   call:setEnvVar "SIRIUS_ATM_PROPERTIES" "remove" remove
   call:writetolog "----------------------------------------------------"
-  @rem Проверяем наличие запущенного трей-агента СП Tomcat и при необходимости останавливаем
+  @rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╜╨░╨╗╨╕╤З╨╕╨╡ ╨╖╨░╨┐╤Г╤Й╨╡╨╜╨╜╨╛╨│╨╛ ╤В╤А╨╡╨╣-╨░╨│╨╡╨╜╤В╨░ ╨б╨Я Tomcat ╨╕ ╨┐╤А╨╕ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╨╕ ╨╛╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝
   tasklist|find "tomcat7w.exe" && taskkill /F /IM tomcat7w.exe
-  call:writetolog "	Отмена установки Apache TomCat 7.0.xx"
-  @rem Удаление сервиса Tomcat
+  call:writetolog "	╨Ю╤В╨╝╨╡╨╜╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ Apache TomCat 7.0.xx"
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╤Б╨╡╤А╨▓╨╕╤Б╨░ Tomcat
   call "%TOMCAT_HOME%\uninstall.exe" -ServiceName="Tomcat7" /S
-  @rem Получение пути к Tomcat7w.lnk начиная с папки %ALLUSERSPROFILE% (включая вложенные)
+  @rem ╨Я╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨┐╤Г╤В╨╕ ╨║ Tomcat7w.lnk ╨╜╨░╤З╨╕╨╜╨░╤П ╤Б ╨┐╨░╨┐╨║╨╕ %ALLUSERSPROFILE% (╨▓╨║╨╗╤О╤З╨░╤П ╨▓╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡)
   for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js getPath "Tomcat7w.lnk" "%ALLUSERSPROFILE%" true') do (
-   @rem Если Tomcat7w.lnk существует, то удаляем
+   @rem ╨Х╤Б╨╗╨╕ Tomcat7w.lnk ╤Б╤Г╤Й╨╡╤Б╤В╨▓╤Г╨╡╤В, ╤В╨╛ ╤Г╨┤╨░╨╗╤П╨╡╨╝
    if exist "%%a\Startup\Tomcat7w.lnk" del "%%a\StartUp\Tomcat7w.lnk" /Q /F > NUL 2>&1
   )
-  @rem Удаление директории TOMCAT_HOME
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕ TOMCAT_HOME
   rd "%TOMCAT_HOME%" /s /q > NUL 2>&1
-  @rem Удаление переменной среды TOMCAT_HOME
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л TOMCAT_HOME
   call:setEnvVar "TOMCAT_HOME" "remove" remove
-  @rem Удаление записей реестра сформированных (нативным) инсталлятором Tomcat
-  @rem Автозапуск трей-агента
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨╖╨░╨┐╨╕╤Б╨╡╨╣ ╤А╨╡╨╡╤Б╤В╤А╨░ ╤Б╤Д╨╛╤А╨╝╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╤Е (╨╜╨░╤В╨╕╨▓╨╜╤Л╨╝) ╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤В╨╛╤А╨╛╨╝ Tomcat
+  @rem ╨Р╨▓╤В╨╛╨╖╨░╨┐╤Г╤Б╨║ ╤В╤А╨╡╨╣-╨░╨│╨╡╨╜╤В╨░
   reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "ApacheTomcatMonitor7.0_Tomcat7" /f >NUL 2>&1
-  @rem Деинсталляция СП Tomcat
+  @rem ╨Ф╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╤П ╨б╨Я Tomcat
   reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Apache Tomcat 7.0 Tomcat7" /f >NUL 2>&1
-  @rem Сервис СП Tomcat
+  @rem ╨б╨╡╤А╨▓╨╕╤Б ╨б╨Я Tomcat
   reg delete "HKLM\SYSTEM\CurrentControlSet\Services\Tomcat7" /f >NUL 2>&1
-  @rem Настройки СП Tomcat
+  @rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨б╨Я Tomcat
   reg delete "HKCU\Software\Apache Software Foundation" /f >NUL 2>&1
-  @rem Запись о СП Tomcat в списке программ
+  @rem ╨Ч╨░╨┐╨╕╤Б╤М ╨╛ ╨б╨Я Tomcat ╨▓ ╤Б╨┐╨╕╤Б╨║╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝
   reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu\Programs\Apache Tomcat 7.0 Tomcat7" /f >NUL 2>&1
-  @rem Настройки СП Tomcat
+  @rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨б╨Я Tomcat
   reg delete "HKLM\SOFTWARE\Apache Software Foundation" /f >NUL 2>&1
-  @rem Настройки сервиса СП Tomcat
+  @rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Б╨╡╤А╨▓╨╕╤Б╨░ ╨б╨Я Tomcat
   reg delete "HKLM\SYSTEM\ControlSet001\Enum\Root\LEGACY_TOMCAT7" /f >NUL 2>&1
-  @rem Настройки сервиса СП Tomcat
+  @rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Б╨╡╤А╨▓╨╕╤Б╨░ ╨б╨Я Tomcat
   reg delete "HKLM\SYSTEM\ControlSet003\Enum\Root\LEGACY_TOMCAT7" /f >NUL 2>&1
-  @rem Настройки сервиса СП Tomcat
+  @rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Б╨╡╤А╨▓╨╕╤Б╨░ ╨б╨Я Tomcat
   reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\Root\LEGACY_TOMCAT7" /f >NUL 2>&1
-  call:writetolog "	Установка Apache TomCat 7.0.xx отменена"
-  @rem Вызов блока отката JRE
+  call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ Apache TomCat 7.0.xx ╨╛╤В╨╝╨╡╨╜╨╡╨╜╨░"
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╤В╨║╨░╤В╨░ JRE
   call:rollBack java
  )
  if [%1]==[java] (
-  @rem Вызов блока формирования GUID удаляемой версии JRE
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Д╨╛╤А╨╝╨╕╤А╨╛╨▓╨░╨╜╨╕╤П GUID ╤Г╨┤╨░╨╗╤П╨╡╨╝╨╛╨╣ ╨▓╨╡╤А╤Б╨╕╨╕ JRE
   call:getJAVAGUID
-  @rem Вызов блока формирования полной версии JRE
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Д╨╛╤А╨╝╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨┐╨╛╨╗╨╜╨╛╨╣ ╨▓╨╡╤А╤Б╨╕╨╕ JRE
   call:setJavaName
   call:writetolog "----------------------------------------------------"
-  call:writetolog "	Отмена установки %JAVAName%"
-  @rem Удаление записи реестра автозапуска настроек агента СИРИУС после первой перезагрузки
+  call:writetolog "	╨Ю╤В╨╝╨╡╨╜╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ %JAVAName%"
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨╖╨░╨┐╨╕╤Б╨╕ ╤А╨╡╨╡╤Б╤В╤А╨░ ╨░╨▓╤В╨╛╨╖╨░╨┐╤Г╤Б╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨░╨│╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б ╨┐╨╛╤Б╨╗╨╡ ╨┐╨╡╤А╨▓╨╛╨╣ ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨╕
   reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "SirusAgent" /f >NUL 2>&1
-  @rem Поиск, остановка и отключение автозапуска сервиса Java Quick Starter
+  @rem ╨Я╨╛╨╕╤Б╨║, ╨╛╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕ ╨╛╤В╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨░╨▓╤В╨╛╨╖╨░╨┐╤Г╤Б╨║╨░ ╤Б╨╡╤А╨▓╨╕╤Б╨░ Java Quick Starter
   net start|find /I "Java Quick Starter" > NUL 2>&1
   if [%errorlevel%]==[0] (
    call net stop "Java Quick Starter" > NUL 2>&1
    sc config JavaQuickStarterService start= disabled
   )
-  @rem Вызов блока деинсталляции JRE
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕ JRE
   call:UninstallJAVA
-  @rem Удаление переменной среды JAVA_HOME
+  @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л JAVA_HOME
   call:setEnvVar "JAVA_HOME" "remove" remove
-  call:writetolog "	Установка %JAVAName% отменена"
+  call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ %JAVAName% ╨╛╤В╨╝╨╡╨╜╨╡╨╜╨░"
  )
 goto:EOF
 
-@rem Блок установки переменных среды
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е ╤Б╤А╨╡╨┤╤Л
 :setEnvVar
- call:writetolog "	Системная переменная %~1"
- call:writetolog "	Значение переменной %~2"
+ call:writetolog "	╨б╨╕╤Б╤В╨╡╨╝╨╜╨░╤П ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П %~1"
+ call:writetolog "	╨Ч╨╜╨░╤З╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ %~2"
  call:logCommand "cscript /NOLOGO C:\install\sirius_agent\siriusTools.js setEnvVar %~1 %~2 %~3"
 goto:EOF
 
-@rem Блок определения полной версии JRE
+@rem ╨С╨╗╨╛╨║ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╤П ╨┐╨╛╨╗╨╜╨╛╨╣ ╨▓╨╡╤А╤Б╨╕╨╕ JRE
 :setJavaName
  if not ["%~1"]==[""] (
   set JAVAName=%~1
  ) else (
-  @rem Вызов блока определения GUID версии JRE
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╤П GUID ╨▓╨╡╤А╤Б╨╕╨╕ JRE
   call:getJAVAGUID
   for /f "tokens=3* skip=2" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{26A24AE4-039D-4CA4-87B4-%currentGUID%}" /v DisplayName') do (
    set JAVAName=%%a %%b
@@ -479,274 +479,274 @@ goto:EOF
  )
 goto:EOF
 
-@rem Блок принудительной установки региональных настроек - Россия
+@rem ╨С╨╗╨╛╨║ ╨┐╤А╨╕╨╜╤Г╨┤╨╕╤В╨╡╨╗╤М╨╜╨╛╨╣ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╤А╨╡╨│╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╤Е ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ - ╨а╨╛╤Б╤Б╨╕╤П
 :setRegional
  rundll32.exe shell32,Control_RunDLL intl.cpl,,/f:"C:\install\sirius_agent\regionalSettings.ini"
 goto:EOF
 
-@rem Блок настройки СП Tomcat
+@rem ╨С╨╗╨╛╨║ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨б╨Я Tomcat
 :setupTomcat
- @rem Переход в директорию %TOMCAT_HOME%\bin\
+ @rem ╨Я╨╡╤А╨╡╤Е╨╛╨┤ ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О %TOMCAT_HOME%\bin\
  pushd "%TOMCAT_HOME%\bin\"
- @rem Вызов блока определения размера оперативной памяти
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╤П ╤А╨░╨╖╨╝╨╡╤А╨░ ╨╛╨┐╨╡╤А╨░╤В╨╕╨▓╨╜╨╛╨╣ ╨┐╨░╨╝╤П╤В╨╕
  call:getRAMsize
- @rem Вызов блока обновления значений критически важных переменных
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╣ ╨║╤А╨╕╤В╨╕╤З╨╡╤Б╨║╨╕ ╨▓╨░╨╢╨╜╤Л╤Е ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╤Е
  call:refreshVars
 
- call:writetolog "	Проверяем и останавливаем Tomcat"
+ call:writetolog "	╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╕ ╨╛╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ Tomcat"
  net start|find /I "Tomcat7" && call net stop Tomcat7
- call:writetolog "	Проверяем и останавливаем JRE"
+ call:writetolog "	╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╕ ╨╛╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ JRE"
  tasklist|find /I "java.exe" && taskkill /F /IM java.exe
 
  if exist Tomcat7.exe (
-  call:writetolog "	Настраиваем используемую версию JRE"
+  call:writetolog "	╨Э╨░╤Б╤В╤А╨░╨╕╨▓╨░╨╡╨╝ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝╤Г╤О ╨▓╨╡╤А╤Б╨╕╤О JRE"
   "Tomcat7.exe" //US//Tomcat7 --Jvm "%JAVA_HOME%\bin\client\jvm.dll"
-  @rem В файле server.xml хранятся специфические (тонкие) настройки СП Tomcat
-  call:writetolog "	Копирую файл настроек server.xml"
-  xcopy /C /R /Y "C:\Install\sirius_agent\server.xml" "%TOMCAT_HOME%\conf\"|find /I %copied% 2>&1 && call:Tomcat7_1 "	Настройка кодировки UTF-8."
+  @rem ╨Т ╤Д╨░╨╣╨╗╨╡ server.xml ╤Е╤А╨░╨╜╤П╤В╤Б╤П ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╤З╨╡╤Б╨║╨╕╨╡ (╤В╨╛╨╜╨║╨╕╨╡) ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨б╨Я Tomcat
+  call:writetolog "	╨Ъ╨╛╨┐╨╕╤А╤Г╤О ╤Д╨░╨╣╨╗ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ server.xml"
+  xcopy /C /R /Y "C:\Install\sirius_agent\server.xml" "%TOMCAT_HOME%\conf\"|find /I %copied% 2>&1 && call:Tomcat7_1 "	╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨░ ╨║╨╛╨┤╨╕╤А╨╛╨▓╨║╨╕ UTF-8."
   
   @rem Service startup type <manual|auto>
-  "Tomcat7.exe" //US//Tomcat7 --Startup auto 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	Тип запуска сервиса = AUTO" && goto:EOF
-  call:Tomcat7_1 "	Тип запуска сервиса = AUTO"
+  "Tomcat7.exe" //US//Tomcat7 --Startup auto 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	╨в╨╕╨┐ ╨╖╨░╨┐╤Г╤Б╨║╨░ ╤Б╨╡╤А╨▓╨╕╤Б╨░ = AUTO" && goto:EOF
+  call:Tomcat7_1 "	╨в╨╕╨┐ ╨╖╨░╨┐╤Г╤Б╨║╨░ ╤Б╨╡╤А╨▓╨╕╤Б╨░ = AUTO"
  
   @rem Initial memory pool size in MB 
-  "Tomcat7.exe" //US//Tomcat7 --JvmMs %minRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	Стартовый размер пула памяти в MB = %minRAMSize%" && goto:EOF
-  call:Tomcat7_1 "	Стартовый размер пула памяти в MB = %minRAMSize%"
+  "Tomcat7.exe" //US//Tomcat7 --JvmMs %minRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	╨б╤В╨░╤А╤В╨╛╨▓╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨░╨╝╤П╤В╨╕ ╨▓ MB = %minRAMSize%" && goto:EOF
+  call:Tomcat7_1 "	╨б╤В╨░╤А╤В╨╛╨▓╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨░╨╝╤П╤В╨╕ ╨▓ MB = %minRAMSize%"
 
   @rem Maximum memory pool size in MB
-  "Tomcat7.exe" //US//Tomcat7 --JvmMx %maxRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	Максимальный размер пула памяти в MB = %maxRAMSize%" && goto:EOF
-  call:Tomcat7_1 "	Максимальный размер пула памяти в MB = %maxRAMSize%"
+  "Tomcat7.exe" //US//Tomcat7 --JvmMx %maxRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	╨Ь╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨░╨╝╤П╤В╨╕ ╨▓ MB = %maxRAMSize%" && goto:EOF
+  call:Tomcat7_1 "	╨Ь╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨░╨╝╤П╤В╨╕ ╨▓ MB = %maxRAMSize%"
 
   @rem Maximum Thread pool size in KB
-  "Tomcat7.exe" //US//Tomcat7 --JvmSs %maxRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	Максимальный размер пула потоков в КB = %maxRAMSize%" && goto:EOF
-  call:Tomcat7_1 "	Максимальный размер пула потоков в KB = %maxRAMSize%"
+  "Tomcat7.exe" //US//Tomcat7 --JvmSs %maxRAMSize% 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	╨Ь╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨╛╤В╨╛╨║╨╛╨▓ ╨▓ ╨ЪB = %maxRAMSize%" && goto:EOF
+  call:Tomcat7_1 "	╨Ь╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╤Л╨╣ ╤А╨░╨╖╨╝╨╡╤А ╨┐╤Г╨╗╨░ ╨┐╨╛╤В╨╛╨║╨╛╨▓ ╨▓ KB = %maxRAMSize%"
 
-  @rem Установка настроек JVM для СП Tomcat.
-  "Tomcat7.exe" //US//Tomcat7 --JvmOptions "-server#-Dcatalina.base=%TOMCAT_HOME%#-Dcatalina.home=%TOMCAT_HOME%#-Djava.endorsed.dirs=%TOMCAT_HOME%\endorsed#-Djava.io.tmpdir=%TOMCAT_HOME%\temp#-Djava.net.preferIPv4Stack=true#-Djava.util.logging.config.file=%TOMCAT_HOME%\conf\logging.properties#-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager#-Djavax.net.ssl.trustStore=%TOMCAT_HOME%\bin\sirius#-XX:+AggressiveOpts#-XX:+UseParallelGC#-XX:ParallelGCThreads=2" 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	Настройка доверенного хранилища для TomCat" && goto:EOF
-  call:Tomcat7_1 "	Настройка доверенного хранилища для TomCat"
+  @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ JVM ╨┤╨╗╤П ╨б╨Я Tomcat.
+  "Tomcat7.exe" //US//Tomcat7 --JvmOptions "-server#-Dcatalina.base=%TOMCAT_HOME%#-Dcatalina.home=%TOMCAT_HOME%#-Djava.endorsed.dirs=%TOMCAT_HOME%\endorsed#-Djava.io.tmpdir=%TOMCAT_HOME%\temp#-Djava.net.preferIPv4Stack=true#-Djava.util.logging.config.file=%TOMCAT_HOME%\conf\logging.properties#-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager#-Djavax.net.ssl.trustStore=%TOMCAT_HOME%\bin\sirius#-XX:+AggressiveOpts#-XX:+UseParallelGC#-XX:ParallelGCThreads=2" 2>&1|find /I "[warn]" 2>&1 && goto:Tomcat7_0 "	╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨░ ╨┤╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨│╨╛ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨░ ╨┤╨╗╤П TomCat" && goto:EOF
+  call:Tomcat7_1 "	╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨░ ╨┤╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨│╨╛ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨░ ╨┤╨╗╤П TomCat"
 	
   @rem Enable using of native Apache Tomcat APR. It should enable a high scalbility and performance.
-  xcopy /C /R /Y "C:\Install\sirius_agent\tcnative-1.dll" "%TOMCAT_HOME%"|find /I %copied% 2>&1 && call:Tomcat7_1 "	Подключение нативной библиотеки APR."
+  xcopy /C /R /Y "C:\Install\sirius_agent\tcnative-1.dll" "%TOMCAT_HOME%"|find /I %copied% 2>&1 && call:Tomcat7_1 "	╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨╜╨░╤В╨╕╨▓╨╜╨╛╨╣ ╨▒╨╕╨▒╨╗╨╕╨╛╤В╨╡╨║╨╕ APR."
   exit /b 0
  ) else (
-  goto:Tomcat7_0 "	Неизвестная ошибка."
+  goto:Tomcat7_0 "	╨Э╨╡╨╕╨╖╨▓╨╡╤Б╤В╨╜╨░╤П ╨╛╤И╨╕╨▒╨║╨░."
  )
  popd
 
 goto:EOF
 
-@rem Блок установки и настройки клиента СИРИУС
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
 :sirius
- call:writetolog "	Проверяем и останавливаем Tomcat"
+ call:writetolog "	╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╕ ╨╛╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ Tomcat"
  net start|find /I "Tomcat7" && call net stop TomCat7
- call:writetolog "	Проверяем и останавливаем JRE"
+ call:writetolog "	╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╕ ╨╛╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ JRE"
  tasklist|find /I "java.exe" && taskkill /F /IM java.exe
  call:writetolog "----------------------------------------------------"
- call:writetolog "	Установка sirius-atm.war"
- @rem Удаление директории с распакованными рабочими версиями файлов
+ call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ sirius-atm.war"
+ @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕ ╤Б ╤А╨░╤Б╨┐╨░╨║╨╛╨▓╨░╨╜╨╜╤Л╨╝╨╕ ╤А╨░╨▒╨╛╤З╨╕╨╝╨╕ ╨▓╨╡╤А╤Б╨╕╤П╨╝╨╕ ╤Д╨░╨╣╨╗╨╛╨▓
  if exist "%TOMCAT_HOME%\work" rd "%TOMCAT_HOME%\work" /s /q >NUL 2>&1
- @rem Удаление директории с распакованной версией клиента СИРИУС
+ @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕ ╤Б ╤А╨░╤Б╨┐╨░╨║╨╛╨▓╨░╨╜╨╜╨╛╨╣ ╨▓╨╡╤А╤Б╨╕╨╡╨╣ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
  if exist "%TOMCAT_HOME%\webapps\sirius-atm" rd "%TOMCAT_HOME%\webapps\sirius-atm" /s /q >NUL 2>&1
- @rem Проверка существования WAR файла клиента СИРИУС
+ @rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╨╜╨╕╤П WAR ╤Д╨░╨╣╨╗╨░ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
  if exist "C:\install\sirius_agent\sirius-atm.war" (
-  @rem Копирование WAR файла клиента СИРИУС в директорию web-приложений СП Tomcat
-  xcopy /C /R /Y "C:\install\sirius_agent\sirius-atm.war" "%TOMCAT_HOME%\webapps\"|find /I %copied% && call:writetolog "	sirius-atm.war - скопирован в папку WEBAPPS"
-  @rem При наличии дополнительных модулей - копирование их в директорию lib СП Tomcat
+  @rem ╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ WAR ╤Д╨░╨╣╨╗╨░ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О web-╨┐╤А╨╕╨╗╨╛╨╢╨╡╨╜╨╕╨╣ ╨б╨Я Tomcat
+  xcopy /C /R /Y "C:\install\sirius_agent\sirius-atm.war" "%TOMCAT_HOME%\webapps\"|find /I %copied% && call:writetolog "	sirius-atm.war - ╤Б╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜ ╨▓ ╨┐╨░╨┐╨║╤Г WEBAPPS"
+  @rem ╨Я╤А╨╕ ╨╜╨░╨╗╨╕╤З╨╕╨╕ ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е ╨╝╨╛╨┤╤Г╨╗╨╡╨╣ - ╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨╕╤Е ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О lib ╨б╨Я Tomcat
   if exist "C:\install\sirius_agent\WEB-INF\lib" (
-   call:writetolog "		Копирование модулей в lib"
+   call:writetolog "		╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨╝╨╛╨┤╤Г╨╗╨╡╨╣ ╨▓ lib"
    xcopy /S /C /R /Y "C:\install\sirius_agent\WEB-INF\lib\*.*" "%TOMCAT_HOME%\lib\"|find /I %copied%
-   @rem Установка переменной среды CLASSPATH
+   @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л CLASSPATH
    call:setEnvVar "CLASSPATH" "%TOMCAT_HOME%\lib"
-   @rem Удаление директории с дополнительными модулями
+   @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕ ╤Б ╨┤╨╛╨┐╨╛╨╗╨╜╨╕╤В╨╡╨╗╤М╨╜╤Л╨╝╨╕ ╨╝╨╛╨┤╤Г╨╗╤П╨╝╨╕
    rd "C:\install\sirius_agent\WEB-INF" /s /q >NUL 2>&1
   )
-  @rem Проверка существования файла настроек клиента СИРИУС
+  @rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╨╜╨╕╤П ╤Д╨░╨╣╨╗╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
   if exist "C:\install\sirius_agent\sirius-atm.properties" (
-   @rem Копирование файла настроек клиента СИРИУС в директорию web-приложений СП Tomcat
-   xcopy /C /R /Y "C:\install\sirius_agent\sirius-atm.properties" "%TOMCAT_HOME%\webapps\"|find /I %copied% && call:writetolog "	sirius-atm.properties - скопирован в папку WEBAPPS"
-   @rem Установка переменной среды SIRIUS_ATM_PROPERTIES
+   @rem ╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О web-╨┐╤А╨╕╨╗╨╛╨╢╨╡╨╜╨╕╨╣ ╨б╨Я Tomcat
+   xcopy /C /R /Y "C:\install\sirius_agent\sirius-atm.properties" "%TOMCAT_HOME%\webapps\"|find /I %copied% && call:writetolog "	sirius-atm.properties - ╤Б╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜ ╨▓ ╨┐╨░╨┐╨║╤Г WEBAPPS"
+   @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ ╤Б╤А╨╡╨┤╤Л SIRIUS_ATM_PROPERTIES
    call:setEnvVar "SIRIUS_ATM_PROPERTIES" "%TOMCAT_HOME%\webapps"
-   @rem Вызов блока проверки наличия кэшированного экрана
+   @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨╜╨░╨╗╨╕╤З╨╕╤П ╨║╤Н╤И╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨│╨╛ ╤Н╨║╤А╨░╨╜╨░
    call:checkCached
-   @rem Проверка существования архива с графическими ресурсами клиента СИРИУС
+   @rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╨╜╨╕╤П ╨░╤А╤Е╨╕╨▓╨░ ╤Б ╨│╤А╨░╤Д╨╕╤З╨╡╤Б╨║╨╕╨╝╨╕ ╤А╨╡╤Б╤Г╤А╤Б╨░╨╝╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
    if exist "C:\install\sirius_agent\resources.rar" (
-    call:writetolog "	Найден архив с ресурсами"
-	@rem Вызов блока распаковки архива с ресурсами
+    call:writetolog "	╨Э╨░╨╣╨┤╨╡╨╜ ╨░╤А╤Е╨╕╨▓ ╤Б ╤А╨╡╤Б╤Г╤А╤Б╨░╨╝╨╕"
+	@rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤А╨░╤Б╨┐╨░╨║╨╛╨▓╨║╨╕ ╨░╤А╤Е╨╕╨▓╨░ ╤Б ╤А╨╡╤Б╤Г╤А╤Б╨░╨╝╨╕
     call:copy_resources
    )
    
-   @rem Проверка существования файла с внешним шрифтом
+   @rem ╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╨╜╨╕╤П ╤Д╨░╨╣╨╗╨░ ╤Б ╨▓╨╜╨╡╤И╨╜╨╕╨╝ ╤И╤А╨╕╤Д╤В╨╛╨╝
    if exist "C:\install\sirius_agent\fonts\PTRoubleSans.ttf" (
-    call:writetolog "	Установка шрифта PTRoubleSans.ttf"
-	@rem Установка и регистрация шрифта в ОС Windows
+    call:writetolog "	╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╤И╤А╨╕╤Д╤В╨░ PTRoubleSans.ttf"
+	@rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕ ╤А╨╡╨│╨╕╤Б╤В╤А╨░╤Ж╨╕╤П ╤И╤А╨╕╤Д╤В╨░ ╨▓ ╨Ю╨б Windows
     call:logCommand "cscript /NOLOGO C:\install\sirius_agent\siriusTools.js installFont ^"PTRoubleSans.ttf^" ^"C:\install\sirius_agent\fonts^""
    ) else (
-    call:writetolog "	WARN: Шрифт PTRoubleSans.ttf не найден."
+    call:writetolog "	WARN: ╨и╤А╨╕╤Д╤В PTRoubleSans.ttf ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜."
    )
   )
   
-  @rem Копируем файл доверенного хранилища в директорию %TOMCAT_HOME%\bin\
-  if exist "%TOMCAT_HOME%\bin\sirius" call:writetolog "	Обновляем файл доверенного хранилища"
-  xcopy /C /R /Y C:\install\sirius_agent\sirius "%TOMCAT_HOME%\bin\"|find /I %copied% > NUL 2>&1 && call:Tomcat7_1 "	Копирование файла доверенного хранилища"
+  @rem ╨Ъ╨╛╨┐╨╕╤А╤Г╨╡╨╝ ╤Д╨░╨╣╨╗ ╨┤╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨│╨╛ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨░ ╨▓ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤О %TOMCAT_HOME%\bin\
+  if exist "%TOMCAT_HOME%\bin\sirius" call:writetolog "	╨Ю╨▒╨╜╨╛╨▓╨╗╤П╨╡╨╝ ╤Д╨░╨╣╨╗ ╨┤╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨│╨╛ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨░"
+  xcopy /C /R /Y C:\install\sirius_agent\sirius "%TOMCAT_HOME%\bin\"|find /I %copied% > NUL 2>&1 && call:Tomcat7_1 "	╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░ ╨┤╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨│╨╛ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨░"
   
-  @rem Вызов блока настроек клиента привязанных к настройкам ЕГПО
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨┐╤А╨╕╨▓╤П╨╖╨░╨╜╨╜╤Л╤Е ╨║ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨░╨╝ ╨Х╨У╨Я╨Ю
   call:userSettings
   
-  @rem Применение настроек реестра специфичных для текущего поставщика ППО (прибит гвоздями TellMe)
+  @rem ╨Я╤А╨╕╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╤А╨╡╨╡╤Б╤В╤А╨░ ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╤З╨╜╤Л╤Е ╨┤╨╗╤П ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╨┐╨╛╤Б╤В╨░╨▓╤Й╨╕╨║╨░ ╨Я╨Я╨Ю (╨┐╤А╨╕╨▒╨╕╤В ╨│╨▓╨╛╨╖╨┤╤П╨╝╨╕ TellMe)
   if exist "C:\install\sirius_agent\%continue%.reg" regedit /s C:\install\sirius_agent\%continue%.reg
   
-  @rem Применение настроек реестра специфичных для клиента СИРИУС
+  @rem ╨Я╤А╨╕╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╤А╨╡╨╡╤Б╤В╤А╨░ ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╤З╨╜╤Л╤Е ╨┤╨╗╤П ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
   if exist "C:\install\sirius_agent\sirius_agent.reg" regedit /s C:\install\sirius_agent\sirius_agent.reg
-  call:writetolog "	Применяем настройки для работы со сценариями Самоинкассации"
+  call:writetolog "	╨Я╤А╨╕╨╝╨╡╨╜╤П╨╡╨╝ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨┤╨╗╤П ╤А╨░╨▒╨╛╤В╤Л ╤Б╨╛ ╤Б╤Ж╨╡╨╜╨░╤А╨╕╤П╨╝╨╕ ╨б╨░╨╝╨╛╨╕╨╜╨║╨░╤Б╤Б╨░╤Ж╨╕╨╕"
   
-  @rem Вызов блока настройки XML журнала для САМОИНКАССАЦИИ
+  @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ XML ╨╢╤Г╤А╨╜╨░╨╗╨░ ╨┤╨╗╤П ╨б╨Р╨Ь╨Ю╨Ш╨Э╨Ъ╨Р╨б╨б╨Р╨ж╨Ш╨Ш
   call:setFrontDataXML
-  @rem Запись даты установки клиента СИРИУС в реестр
+  @rem ╨Ч╨░╨┐╨╕╤Б╤М ╨┤╨░╤В╤Л ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б ╨▓ ╤А╨╡╨╡╤Б╤В╤А
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sirius agent" /v "InstallDate" /t REG_SZ /d "%YEAR%%MONTH%%DAY%" /f >NUL 2>&1
-  call:writetolog "	SIRIUS-ATM.WAR успешно установлен"
+  call:writetolog "	SIRIUS-ATM.WAR ╤Г╤Б╨┐╨╡╤И╨╜╨╛ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜"
  ) else (
-  call:writetolog "	sirius-atm.war НЕ найден."
-  call:writetolog "	Для удаления установленных продуктов: "
+  call:writetolog "	sirius-atm.war ╨Э╨Х ╨╜╨░╨╣╨┤╨╡╨╜."
+  call:writetolog "	╨Ф╨╗╤П ╤Г╨┤╨░╨╗╨╡╨╜╨╕╤П ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╤Л╤Е ╨┐╤А╨╛╨┤╤Г╨║╤В╨╛╨▓: "
   call:writetolog "		1. JRE7"
   call:writetolog "		2. Apache Tomcat7"
-  call:writetolog "	Выполнить setup.cmd uninstall"
+  call:writetolog "	╨Т╤Л╨┐╨╛╨╗╨╜╨╕╤В╤М setup.cmd uninstall"
   call:writetolog "****************************************************"
-  @rem Ожидаем ~ 3 секунды
+  @rem ╨Ю╨╢╨╕╨┤╨░╨╡╨╝ ~ 3 ╤Б╨╡╨║╤Г╨╜╨┤╤Л
   call:wait 3
-  @rem Возвращаем переменные среды в исходное состояние
+  @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
   call:prepareEnv 1
  )
 goto:EOF
 
-@rem Блока деинсталляции клиента СИРИУС
+@rem ╨С╨╗╨╛╨║╨░ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
 :sUninstall
- call:writetolog "	Выполняется деинсталляция продукта SIRIUS."
- @rem Вызов блока отката установки Tomcat
+ call:writetolog "	╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╤П ╨┐╤А╨╛╨┤╤Г╨║╤В╨░ SIRIUS."
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╤В╨║╨░╤В╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ Tomcat
  call:rollBack tomcat
- @rem Удаление лога установки JRE при наличии
+ @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨╗╨╛╨│╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ JRE ╨┐╤А╨╕ ╨╜╨░╨╗╨╕╤З╨╕╨╕
  if exist C:\Install\sirius_agent\jre_install.log del C:\Install\sirius_agent\jre_install.log /s /q > NUL 2>&1
- @rem Удаление записи реестра из блока Установка и удаление программ
+ @rem ╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨╖╨░╨┐╨╕╤Б╨╕ ╤А╨╡╨╡╤Б╤В╤А╨░ ╨╕╨╖ ╨▒╨╗╨╛╨║╨░ ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕ ╤Г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝
  reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sirius agent" /f > NUL 2>&1
 
- call:writetolog "	Деинсталляция продукта завершена."
+ call:writetolog "	╨Ф╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╤П ╨┐╤А╨╛╨┤╤Г╨║╤В╨░ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░."
  call:writetolog "****************************************************"
- @rem Возвращаем переменные среды в исходное состояние
+ @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
  call:prepareEnv 1 
- @rem Ожидаем ~ 3 секунды
+ @rem ╨Ю╨╢╨╕╨┤╨░╨╡╨╝ ~ 3 ╤Б╨╡╨║╤Г╨╜╨┤╤Л
  call:wait 3
  if [%~2]==[silent] goto:EOF 
  
- @rem Показываем окно с предупреждением о необходимости презагрузки
- for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\isContinue.vbs "Необходимо произвести перезагрузку банкомата!"') do (
+ @rem ╨Я╨╛╨║╨░╨╖╤Л╨▓╨░╨╡╨╝ ╨╛╨║╨╜╨╛ ╤Б ╨┐╤А╨╡╨┤╤Г╨┐╤А╨╡╨╢╨┤╨╡╨╜╨╕╨╡╨╝ ╨╛ ╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛╤Б╤В╨╕ ╨┐╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨╕
+ for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\isContinue.vbs "╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨┐╤А╨╛╨╕╨╖╨▓╨╡╤Б╤В╨╕ ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╤Г ╨▒╨░╨╜╨║╨╛╨╝╨░╤В╨░!"') do (
   if [%%a]==[_go_] (
-   @rem Принудительная перезагрузка УС
-   call:writetolog "	Пользователь выбрал принудительную перезугрузку банкомата."
+   @rem ╨Я╤А╨╕╨╜╤Г╨┤╨╕╤В╨╡╨╗╤М╨╜╨░╤П ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨░ ╨г╨б
+   call:writetolog "	╨Я╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤М ╨▓╤Л╨▒╤А╨░╨╗ ╨┐╤А╨╕╨╜╤Г╨┤╨╕╤В╨╡╨╗╤М╨╜╤Г╤О ╨┐╨╡╤А╨╡╨╖╤Г╨│╤А╤Г╨╖╨║╤Г ╨▒╨░╨╜╨║╨╛╨╝╨░╤В╨░."
    shutdown -r -t 00 -f
    goto:EOF
   )
  )
 goto:EOF
 
-@rem Блок установки СП Tomcat
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨б╨Я Tomcat
 :tomcat
  call:writetolog "----------------------------------------------------"
- @rem Установка переменной TEMP_TOMCAT_HOME
+ @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╨╛╨╣ TEMP_TOMCAT_HOME
  for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\siriusTools.js setEnvVar "TOMCAT_HOME"') do (set TEMP_TOMCAT_HOME=%%a)
  
- @rem Вызов блока проверки версии Tomcat
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨▓╨╡╤А╤Б╨╕╨╕ Tomcat
  call:checkTomcat 7.0.41
- @rem Установка или настройка Tomcat
+ @rem ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕╨╗╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨░ Tomcat
  if [%updateTomcat%]==[true] goto:installTomcat
  if [%updateTomcat%]==[false] call:setupTomcat
- @rem Если установка или настройка Tomcat прошли успешно - вызов блока установки и настройки клиента СИРИУС
+ @rem ╨Х╤Б╨╗╨╕ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╕╨╗╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨░ Tomcat ╨┐╤А╨╛╤И╨╗╨╕ ╤Г╤Б╨┐╨╡╤И╨╜╨╛ - ╨▓╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
  if %errorlevel% equ 0 call:sirius
  exit /b 0
 goto:EOF
 
-@rem Блок отката установки Tomcat с записью в лог
+@rem ╨С╨╗╨╛╨║ ╨╛╤В╨║╨░╤В╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ Tomcat ╤Б ╨╖╨░╨┐╨╕╤Б╤М╤О ╨▓ ╨╗╨╛╨│
 :tomcat7_0
  call:writetolog "	%~1"
- call:writetolog "	Сбой установки Apache TomCat 7"
- @rem Вызов блока отката установки Tomcat
+ call:writetolog "	╨б╨▒╨╛╨╣ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ Apache TomCat 7"
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨╛╤В╨║╨░╤В╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ Tomcat
  call:rollBack tomcat
- call:writetolog "	Произведен откат изменений в системе"
+ call:writetolog "	╨Я╤А╨╛╨╕╨╖╨▓╨╡╨┤╨╡╨╜ ╨╛╤В╨║╨░╤В ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ ╨▓ ╤Б╨╕╤Б╤В╨╡╨╝╨╡"
  call:writetolog "****************************************************"
- @rem Ожидаем ~ 3 секунды
+ @rem ╨Ю╨╢╨╕╨┤╨░╨╡╨╝ ~ 3 ╤Б╨╡╨║╤Г╨╜╨┤╤Л
  call:wait 3
- @rem Возвращаем переменные среды в исходное состояние
+ @rem ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╡ ╤Б╤А╨╡╨┤╤Л ╨▓ ╨╕╤Б╤Е╨╛╨┤╨╜╨╛╨╡ ╤Б╨╛╤Б╤В╨╛╤П╨╜╨╕╨╡
  call:prepareEnv 1
  exit
 goto:EOF
 
-@rem Блок логирования установки настроек СП Tomcat
+@rem ╨С╨╗╨╛╨║ ╨╗╨╛╨│╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨б╨Я Tomcat
 :tomcat7_1
  call:writetolog "	%~1"
  exit /b 0
 goto:EOF
 
-@rem Блок деинсталлирования клиента СИРИУС
+@rem ╨С╨╗╨╛╨║ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨║╨╗╨╕╨╡╨╜╤В╨░ ╨б╨Ш╨а╨Ш╨г╨б
 :uninstall
- @rem Вызов блока проверки JRE
+ @rem ╨Т╤Л╨╖╨╛╨▓ ╨▒╨╗╨╛╨║╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ JRE
  call:checkJava 0
- @rem Если есть параметр silent - вызвать блок тихой деинсталляции
+ @rem ╨Х╤Б╨╗╨╕ ╨╡╤Б╤В╤М ╨┐╨░╤А╨░╨╝╨╡╤В╤А silent - ╨▓╤Л╨╖╨▓╨░╤В╤М ╨▒╨╗╨╛╨║ ╤В╨╕╤Е╨╛╨╣ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕
  if [%~2]==[silent] goto:sUninstall
- @rem Показываем окно с предупреждением о попытке удаления продукта
- for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\isContinue.vbs "Вы собираетесь полностью удалить терминальный агент SIRIUS!"') do (
+ @rem ╨Я╨╛╨║╨░╨╖╤Л╨▓╨░╨╡╨╝ ╨╛╨║╨╜╨╛ ╤Б ╨┐╤А╨╡╨┤╤Г╨┐╤А╨╡╨╢╨┤╨╡╨╜╨╕╨╡╨╝ ╨╛ ╨┐╨╛╨┐╤Л╤В╨║╨╡ ╤Г╨┤╨░╨╗╨╡╨╜╨╕╤П ╨┐╤А╨╛╨┤╤Г╨║╤В╨░
+ for /f "tokens=*" %%a in ('cscript /NOLOGO C:\install\sirius_agent\isContinue.vbs "╨Т╤Л ╤Б╨╛╨▒╨╕╤А╨░╨╡╤В╨╡╤Б╤М ╨┐╨╛╨╗╨╜╨╛╤Б╤В╤М╤О ╤Г╨┤╨░╨╗╨╕╤В╤М ╤В╨╡╤А╨╝╨╕╨╜╨░╨╗╤М╨╜╤Л╨╣ ╨░╨│╨╡╨╜╤В SIRIUS!"') do (
   if [%%a]==[stop] (
-   @rem Прерываем деинсталляцию, если пользователь отказался
-   call:writetolog "	Деинсталляция продукта не выполнена. Отказ пользователя."
+   @rem ╨Я╤А╨╡╤А╤Л╨▓╨░╨╡╨╝ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╤О, ╨╡╤Б╨╗╨╕ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤М ╨╛╤В╨║╨░╨╖╨░╨╗╤Б╤П
+   call:writetolog "	╨Ф╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╤П ╨┐╤А╨╛╨┤╤Г╨║╤В╨░ ╨╜╨╡ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨░. ╨Ю╤В╨║╨░╨╖ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П."
    exit
   )
  )
-@rem Безусловный преход в блок тихой деинсталляции
+@rem ╨С╨╡╨╖╤Г╤Б╨╗╨╛╨▓╨╜╤Л╨╣ ╨┐╤А╨╡╤Е╨╛╨┤ ╨▓ ╨▒╨╗╨╛╨║ ╤В╨╕╤Е╨╛╨╣ ╨┤╨╡╨╕╨╜╤Б╤В╨░╨╗╨╗╤П╤Ж╨╕╨╕
 goto:sUninstall
 
-@rem Блок установки настроек пользователя связанных с ЕГПО
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П ╤Б╨▓╤П╨╖╨░╨╜╨╜╤Л╤Е ╤Б ╨Х╨У╨Я╨Ю
 :userSettings
- call:writetolog "	Подготовка настроек пользователя."
- @rem Проверяем не настроен ли вызов специфичных настроек ранее
+ call:writetolog "	╨Я╨╛╨┤╨│╨╛╤В╨╛╨▓╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П."
+ @rem ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝ ╨╜╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╡╨╜ ╨╗╨╕ ╨▓╤Л╨╖╨╛╨▓ ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╤З╨╜╤Л╤Е ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╤А╨░╨╜╨╡╨╡
  type c:\scs\atm_h\startup\vendor_start.bat|find "userSettings.bat" >NUL 2>&1
  if not [%errorlevel%]==[0] (
-  call:writetolog "		Необходимо внести правки в настройки пользователя."
+  call:writetolog "		╨Э╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╨╛ ╨▓╨╜╨╡╤Б╤В╨╕ ╨┐╤А╨░╨▓╨║╨╕ ╨▓ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤П."
   echo. >>c:\scs\atm_h\startup\vendor_start.bat
   echo call c:\scs\atm_h\startup\userSettings.bat >> c:\scs\atm_h\startup\vendor_start.bat
-  call:writetolog "		Изменен файл vendor_start.bat"
+  call:writetolog "		╨Ш╨╖╨╝╨╡╨╜╨╡╨╜ ╤Д╨░╨╣╨╗ vendor_start.bat"
   echo. >c:\scs\atm_h\startup\userSettings.bat
   echo if exist "C:\install\sirius_agent\%continue%.reg" regedit /s C:\install\sirius_agent\%continue%.reg >>c:\scs\atm_h\startup\userSettings.bat
-  call:writetolog "		Создан файл userSettings.bat"
+  call:writetolog "		╨б╨╛╨╖╨┤╨░╨╜ ╤Д╨░╨╣╨╗ userSettings.bat"
  )
 goto:EOF
 
-@rem Блок ожидания (ping на 127.0.0.1 выполняется где-то секунду)
+@rem ╨С╨╗╨╛╨║ ╨╛╨╢╨╕╨┤╨░╨╜╨╕╤П (ping ╨╜╨░ 127.0.0.1 ╨▓╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П ╨│╨┤╨╡-╤В╨╛ ╤Б╨╡╨║╤Г╨╜╨┤╤Г)
 :wait
  ping -n %1 127.0.0.1 > NUL 2>&1
 goto:EOF
 
-@rem Блок записи в лог
+@rem ╨С╨╗╨╛╨║ ╨╖╨░╨┐╨╕╤Б╨╕ ╨▓ ╨╗╨╛╨│
 :writetolog
  set logdata=%~1
  @echo %Date% %Time% %logdata%
  if [%STDOUT_REDIRECTED%]==[yes] @echo %Date% %Time% %logdata% > CON
 goto:EOF
 
-@rem Блок настроек NetBIOS
+@rem ╨С╨╗╨╛╨║ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ NetBIOS
 :netBIOSinfo
  call:logCommand "wmic nicconfig get caption, index, TcpipNetbiosOptions"
 goto:EOF
 
 :switchOn
-@rem Включение NETBIOS
+@rem ╨Т╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ NETBIOS
  if defined command call:setParams
  call:logCommand "wmic nicconfig where (TcpipNetbiosOptions=2) call SetTcpipNetbios 1"
 goto:EOF
 
 :switchOff
-@rem Отключение NETBIOS
+@rem ╨Ю╤В╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ NETBIOS
  call:logCommand "wmic nicconfig where (TcpipNetbiosOptions=1 OR TcpipNetbiosOptions=0) call SetTcpipNetbios 2"
 goto:EOF
 
 :setParams
-rem Настройка NETBIOS
+rem ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨░ NETBIOS
  @reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "NameSrvQueryCount" /t REG_DWORD /d 0x0 /f >NUL &&  call:writetolog "NameSrvQueryCount = 0"
  @reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "NameSrvQueryTimeout" /t REG_DWORD /d 0x1 /f >NUL && call:writetolog "NameSrvQueryTimeout = 1"
  @reg add "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "BcastNameQueryCount" /t REG_DWORD /d 0x0 /f >NUL && call:writetolog "BcastNameQueryCount = 0" 
@@ -754,7 +754,7 @@ rem Настройка NETBIOS
 goto:EOF
 
 
-@rem Блок удаления JRE
+@rem ╨С╨╗╨╛╨║ ╤Г╨┤╨░╨╗╨╡╨╜╨╕╤П JRE
 :UninstallJAVA
 for /f "usebackq skip=4 tokens=2*" %%i in (`@reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{26A24AE4-039D-4CA4-87B4-2F03217080FF}" /v "UninstallString"`) do ( 
  call %%j /qn /norestart
@@ -764,7 +764,7 @@ for /f "usebackq skip=4 tokens=2*" %%i in (`@reg query "HKLM\SOFTWARE\Microsoft\
 )
 goto:EOF
 
-@rem Блок определения GUID версии JRE
+@rem ╨С╨╗╨╛╨║ ╨╛╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╤П GUID ╨▓╨╡╤А╤Б╨╕╨╕ JRE
 :getJAVAGUID
  @reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{26A24AE4-039D-4CA4-87B4-2F8%osversion%%JAVAVersion%FF}" > NUL 2>&1
  if [%errorlevel%]==[0] (
@@ -774,37 +774,37 @@ goto:EOF
  )
 goto:EOF
 
-@rem Блок настройки XML журнала для САМОИНКАССАЦИИ
+@rem ╨С╨╗╨╛╨║ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ XML ╨╢╤Г╤А╨╜╨░╨╗╨░ ╨┤╨╗╤П ╨б╨Р╨Ь╨Ю╨Ш╨Э╨Ъ╨Р╨б╨б╨Р╨ж╨Ш╨Ш
 :setFrontDataXML
  set /a FrontDataXMLcount = 1
  reg query "HKCR\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol"|find "FrontDataXML"
- @rem Если найден раздел реестра, проверям сколько в нем уже есть записей
+ @rem ╨Х╤Б╨╗╨╕ ╨╜╨░╨╣╨┤╨╡╨╜ ╤А╨░╨╖╨┤╨╡╨╗ ╤А╨╡╨╡╤Б╤В╤А╨░, ╨┐╤А╨╛╨▓╨╡╤А╤П╨╝ ╤Б╨║╨╛╨╗╤М╨║╨╛ ╨▓ ╨╜╨╡╨╝ ╤Г╨╢╨╡ ╨╡╤Б╤В╤М ╨╖╨░╨┐╨╕╤Б╨╡╨╣
  if %errorlevel% equ 0 call :checkCount
- @rem Добавляем новую запись, если нужно
+ @rem ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨╜╨╛╨▓╤Г╤О ╨╖╨░╨┐╨╕╤Б╤М, ╨╡╤Б╨╗╨╕ ╨╜╤Г╨╢╨╜╨╛
  if %FrontDataXMLcount% gtr 0 call :addParameter
 goto:EOF
 
-@rem Блок установки парамтеров XML журнала для САМОИНКАССАЦИИ в реестр
+@rem ╨С╨╗╨╛╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨┐╨░╤А╨░╨╝╤В╨╡╤А╨╛╨▓ XML ╨╢╤Г╤А╨╜╨░╨╗╨░ ╨┤╨╗╤П ╨б╨Р╨Ь╨Ю╨Ш╨Э╨Ъ╨Р╨б╨б╨Р╨ж╨Ш╨Ш ╨▓ ╤А╨╡╨╡╤Б╤В╤А
 :addParameter
- call:writetolog "		Параметры не найдены. Применяем настройку."
+ call:writetolog "		╨Я╨░╤А╨░╨╝╨╡╤В╤А╤Л ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜╤Л. ╨Я╤А╨╕╨╝╨╡╨╜╤П╨╡╨╝ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╤Г."
  echo reg add "HKCR\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol\FrontDataXML\%FrontDataXMLcount%" /v "ParamName" /t REG_SZ /d "SUIT" /f
  echo reg add "HKCR\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol\FrontDataXML\%FrontDataXMLcount%" /v "ParamVarName" /t REG_SZ /d "SUIT_NUMBER" /f
 goto:EOF
 
-@rem Блок проверки количества парамтеров XML журнала для САМОИНКАССАЦИИ в реестре
+@rem ╨С╨╗╨╛╨║ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨║╨╛╨╗╨╕╤З╨╡╤Б╤В╨▓╨░ ╨┐╨░╤А╨░╨╝╤В╨╡╤А╨╛╨▓ XML ╨╢╤Г╤А╨╜╨░╨╗╨░ ╨┤╨╗╤П ╨б╨Р╨Ь╨Ю╨Ш╨Э╨Ъ╨Р╨б╨б╨Р╨ж╨Ш╨Ш ╨▓ ╤А╨╡╨╡╤Б╤В╤А╨╡
 :checkCount
- call:writetolog "		Найден раздел реестра FrontDataXML"
+ call:writetolog "		╨Э╨░╨╣╨┤╨╡╨╜ ╤А╨░╨╖╨┤╨╡╨╗ ╤А╨╡╨╡╤Б╤В╤А╨░ FrontDataXML"
  for /f "tokens=8 delims=\" %%a in ('reg query "HKCR\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol\FrontDataXML" /f "*" /k^|find "FrontDataXML"') do (
   echo %%a
   if %FrontDataXMLcount% gtr 0 call:addNew %%a
  )
 goto:EOF
 
-@rem Блок добавления парамтера XML журнала для САМОИНКАССАЦИИ в реестре
+@rem ╨С╨╗╨╛╨║ ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╤П ╨┐╨░╤А╨░╨╝╤В╨╡╤А╨░ XML ╨╢╤Г╤А╨╜╨░╨╗╨░ ╨┤╨╗╤П ╨б╨Р╨Ь╨Ю╨Ш╨Э╨Ъ╨Р╨б╨б╨Р╨ж╨Ш╨Ш ╨▓ ╤А╨╡╨╡╤Б╤В╤А╨╡
 :addNew
  reg query "HKCR\WOSA/XFS_ROOT\ATM\PaymentSystems\NDC\Protocol\FrontDataXML\%~1" /f "SUIT"
  if %errorlevel% equ 0 (
-  call:writetolog "		Параметры уже настроены. Повторное применение пропущено."
+  call:writetolog "		╨Я╨░╤А╨░╨╝╨╡╤В╤А╤Л ╤Г╨╢╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╡╨╜╤Л. ╨Я╨╛╨▓╤В╨╛╤А╨╜╨╛╨╡ ╨┐╤А╨╕╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨┐╤Г╤Й╨╡╨╜╨╛."
   set /a FrontDataXMLcount=-1
  ) else (
   set /a FrontDataXMLcount=%FrontDataXMLcount%+1
